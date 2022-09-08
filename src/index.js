@@ -31,6 +31,10 @@ class Todo {
  
 	 /** Remove one or all of the TO-DO items. 
 	  * Also remove one tag or all of the tags of the TO-DO Item.
+	  * @param {number} obj.id Unique number of the TO-DO Item. (required)
+	  * @param {boolean} obj.isTag Whether you want to delete one or all of the tags? (optional)
+	  * @param {string} obj.tagName Name of the tag, if you want to change one tag. (optional)
+	  * @return {boolean} About the delete operation was successful or not.
 	 */
-	 delete() {}
+	 delete({id, isTag, tagName}) {}
 }
