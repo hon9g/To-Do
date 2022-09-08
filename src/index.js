@@ -47,7 +47,16 @@ class Todo {
 	 * @param {string} obj.tagName Name of the tag you want to change, if you want to change one of the tags. (optional)
 	 * @return {TodoItem} Updated TO-DO item.
 	*/
-	 update({ id, property, newValue, tagName}) {}
+	 update({ id, property, newValue, tagName}) {
+		if (property === 'tags') {
+			const nextTags = this.list.get(id)['tags'].filter(tag => tag !== tagName)
+			nextTags.push(newValue)
+			this.list.get(id)['tags'] = nextTags
+		} else {
+			this.list.get(id)[property] = newValue
+		}
+		return this.list.get(id)
+	 }
  
 	 /** Remove one or all of the TO-DO items. 
 	  * Also remove one tag or all of the tags of the TO-DO Item.
@@ -77,4 +86,17 @@ todo.create({
 })
 
 console.log(todo.read())
+
+todo.update({
+	id: 1,
+	property: 'tags',
+	newValue: 'd',
+	tagName: 'a',
+})
+todo.update({
+	id: 1,
+	property: 'isDone',
+	newValue: true,
+})
+
 console.log(todo.read({ id: 1 }))
