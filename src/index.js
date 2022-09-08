@@ -22,13 +22,17 @@ class Todo {
 	/** Add a TO-DO Item.
 	 * @param {TodoItem}
 	 */
-	 create({ id, description, isDone, category, tags }) {}
+	 create({ id, description, isDone, category, tags }) {
+		if (!this.list.has(id)) {
+			this.list.set(id, { id, description, isDone, category, tags })
+		}
+	 }
 
 	 /** Read one or all of the TO-DO Items.
 	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
 	  * @return {TodoItem | Array.<TodoItem>} One or all of TO-DO items to read.
 	 */
-	 read({ id }) {
+	 read({ id } = {}) {
 		if (id) {
 			return this.list.get(id)
 		}
