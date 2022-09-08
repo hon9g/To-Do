@@ -60,11 +60,22 @@ class Todo {
  
 	 /** Remove one or all of the TO-DO items. 
 	  * Also remove one tag or all of the tags of the TO-DO Item.
-	  * @param {number} obj.id Unique number of the TO-DO Item. (required)
+	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
 	  * @param {boolean} obj.isTag Whether you want to delete one or all of the tags? (optional)
 	  * @param {string} obj.tagName Name of the tag, if you want to change one tag. (optional)
 	 */
-	 delete({id, isTag, tagName}) {}
+	 delete({id, isTag, tagName} = {}) {
+		if (isTag) {
+			const nextTags = this.list.get(id)['tags'].filter(tag => tag !== tagName)
+			this.list.get(id)['tags'] = nextTags
+			return
+		}
+		if (id) {
+			this.list.delete(id)
+			return
+		}
+		this.list.clear()
+	 }
 }
 
 // Test
@@ -100,3 +111,26 @@ todo.update({
 })
 
 console.log(todo.read({ id: 1 }))
+
+todo.delete({
+	id: 1,
+	isTag: true,
+	tagName: 'b',
+})
+console.log(todo.read())
+
+todo.delete({ id: 1 })
+
+todo.create({
+	id: 3,
+	description: 'dd3',
+	isDone: false,
+	category: 'A3',
+	tags: ['a3', 'b3', 'c3']
+})
+
+console.log(todo.read())
+
+todo.delete()
+
+console.log(todo.read())
