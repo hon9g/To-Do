@@ -1,5 +1,27 @@
 // @ts-check
 
+/** @typedef {'description'} PROPERTY_DESCRIPTION */
+/** @typedef {'isDone'} PROPERTY_ISDONE */
+/** @typedef {'category'} PROPERTY_CATEGORY */
+/** @typedef {'tags'} PROPERTY_TAGS */
+/** @typedef {'general'} DEFAULT_CATEGORY */
+
+/** @type {PROPERTY_DESCRIPTION} */
+const PROPERTY_DESCRIPTION = 'description'
+
+/** @type {PROPERTY_ISDONE} */
+const PROPERTY_ISDONE = 'isDone'
+
+/** @type {PROPERTY_CATEGORY} */
+const PROPERTY_CATEGORY = 'category'
+
+/** @type {PROPERTY_TAGS} */
+const PROPERTY_TAGS = 'tags'
+
+/** @type {DEFAULT_CATEGORY} */
+const DEFAULT_CATEGORY = 'general'
+
+
 /** TO-DO Item.
  * @typedef {Object} TodoItem
  * @property {number} id Unique number of the TO-DO Item.
@@ -28,7 +50,7 @@ class Todo {
 				id,
 				description: description ?? '',
 				isDone: isDone ?? false,
-				category: category ?? 'general',
+				category: category ?? DEFAULT_CATEGORY,
 				tags: tags ?? [],
 			})
 		}
@@ -54,13 +76,13 @@ class Todo {
 	 * @return {TodoItem} Updated TO-DO item.
 	*/
 	 update({ id, property, newValue, tagName}) {
-		if (['description', 'isDone', 'category', 'tags'].includes(property)) {
+		if ([PROPERTY_DESCRIPTION, PROPERTY_DESCRIPTION, PROPERTY_CATEGORY, PROPERTY_TAGS].includes(property)) {
 			throw new Error(`Invaild property: ${property}`)
 		}
-		if (property === 'tags') {
-			const nextTags = this.list.get(id)['tags'].filter(tag => tag !== tagName)
+		if (PROPERTY_TAGS === property) {
+			const nextTags = this.list.get(id)[PROPERTY_TAGS].filter(tag => tag !== tagName)
 			nextTags.push(newValue)
-			this.list.get(id)['tags'] = nextTags
+			this.list.get(id)[PROPERTY_TAGS] = nextTags
 		} else {
 			this.list.get(id)[property] = newValue
 		}
