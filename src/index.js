@@ -19,9 +19,15 @@ class Todo {
 	 */
 	 read({ id }) {}
 
-	/** Change the tag content of the TO-DO Item.
+	/** Change one of property of the TO-DO item.
+	 * Also can change one tag item of the TO-DO item.
+	 * @param {number} obj.id Unique number of the TO-DO Item. (required)
+	 * @param {string} obj.property Name of the property you want to change. (required)
+	 * @param {string | boolean} obj.newValue New value of the property. (required)
+	 * @param {string} obj.tagName Name of the tag you want to change, if you want to change one of the tags. (optional)
+	 * @return {boolean} About the updating was successful or not.
 	*/
-	 update() {}
+	 update({ id, property, newValue, tagName}) {}
  
 	 /** Remove one or all of the TO-DO items. 
 	  * Also remove one tag or all of the tags of the TO-DO Item.
