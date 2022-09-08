@@ -68,10 +68,13 @@ class Todo {
 	  * @param {string} obj.tagName Name of the tag, if you want to change one tag. (optional)
 	 */
 	 delete({id, isTag, tagName} = {}) {
-		if (isTag) {
+		if (isTag && tagName) {
 			const nextTags = this.list.get(id)['tags'].filter(tag => tag !== tagName)
 			this.list.get(id)['tags'] = nextTags
 			return
+		}
+		if (isTag) {
+			this.list.get(id)['tags'] = []
 		}
 		if (id) {
 			this.list.delete(id)
