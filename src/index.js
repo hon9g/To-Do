@@ -57,3 +57,24 @@ class Todo {
 	 */
 	 delete({id, isTag, tagName}) {}
 }
+
+// Test
+const todo = new Todo();
+console.log(todo)
+todo.create({
+	id: 1,
+	description: 'dd',
+	isDone: false,
+	category: 'A',
+	tags: ['a', 'b', 'c']
+})
+todo.create({
+	id: 2,
+	description: 'dd2',
+	isDone: false,
+	category: 'A2',
+	tags: ['a2', 'b2', 'c2']
+})
+
+console.log(todo.read())
+console.log(todo.read({ id: 1 }))
