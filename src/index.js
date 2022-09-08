@@ -1,25 +1,22 @@
 /**
  * Represents a Todo App.
- * @constructor
+ * @class
  */
-function Todo() {
+class Todo {
 	/** Add a TO-DO Item.
-	 * @member {@function} 
 	 */
-	 this.create = () => {}
+	 create() {}
 
 	 /** Read All of the TO-DO Items.
-	  * @member {@function}
 	 */
-	 this.read = () => {}
+	 read() {}
 
 	/** Change the tag content of the TO-DO Item.
-	 * @member {@function}
 	*/
-	 this.update = () => {}
+	 update() {}
  
 	 /** Remove one or all of the TO-DO items. 
 	  * Also remove one tag or all of the tags of the TO-DO Item.
 	 */
-	 this.delete = () => {}
+	 delete() {}
 }
