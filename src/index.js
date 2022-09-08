@@ -24,7 +24,13 @@ class Todo {
 	 */
 	 create({ id, description, isDone, category, tags }) {
 		if (!this.list.has(id)) {
-			this.list.set(id, { id, description, isDone, category, tags })
+			this.list.set(id, { 
+				id,
+				description: description ?? '',
+				isDone: isDone ?? false,
+				category: category ?? 'general',
+				tags: tags ?? [],
+			})
 		}
 	 }
 
