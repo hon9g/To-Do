@@ -28,7 +28,12 @@ class Todo {
 	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
 	  * @return {TodoItem | Array.<TodoItem>} One or all of TO-DO items to read.
 	 */
-	 read({ id }) {}
+	 read({ id }) {
+		if (id) {
+			return this.list.get(id)
+		}
+		return [...this.list.values()]
+	 }
 
 	/** Change one of property of the TO-DO item.
 	 * Also can change one tag item of the TO-DO item.
