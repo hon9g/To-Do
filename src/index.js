@@ -4,6 +4,7 @@
 /** @typedef {'isDone'} PROPERTY_ISDONE */
 /** @typedef {'category'} PROPERTY_CATEGORY */
 /** @typedef {'tags'} PROPERTY_TAGS */
+/** @typedef {PROPERTY_DESCRIPTION | PROPERTY_DESCRIPTION | PROPERTY_CATEGORY | PROPERTY_TAGS} Property */
 /** @typedef {'general'} DEFAULT_CATEGORY */
 
 /** @type {PROPERTY_DESCRIPTION} */
@@ -70,7 +71,7 @@ class Todo {
 	/** Change one of property of the TO-DO item.
 	 * Also can change one tag item of the TO-DO item.
 	 * @param {number} obj.id Unique number of the TO-DO Item. (required)
-	 * @param {string} obj.property Name of the property you want to change. (required)
+	 * @param {Property} obj.property Name of the property you want to change. (required)
 	 * @param {string | boolean} obj.newValue New value of the property. (required)
 	 * @param {string} obj.tagName Name of the tag you want to change, if you want to change one of the tags. (optional)
 	 * @return {TodoItem} Updated TO-DO item.
