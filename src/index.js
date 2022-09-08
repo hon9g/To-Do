@@ -1,4 +1,16 @@
 /**
+ * Represents a Todo App.
+ * @constructor
+ * create() 
+ */
+function Todo() {
+	this.create = () => {}
+	this.read = () => {}
+	this.update = () => {}
+	this.delete = () => {}
+}
+
+/**
  * Represents a book.
  * @constructor
  * @param {string} title - The title of the book.
