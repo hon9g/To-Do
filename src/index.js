@@ -13,9 +13,11 @@ class Todo {
 	 */
 	 create({ id, description, isDone, category, tags }) {}
 
-	 /** Read All of the TO-DO Items.
+	 /** Read one or all of the TO-DO Items.
+	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
+	  * @return {boolean} About the reading was successful or not.
 	 */
-	 read() {}
+	 read({ id }) {}
 
 	/** Change the tag content of the TO-DO Item.
 	*/
