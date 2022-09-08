@@ -26,6 +26,7 @@ class Todo {
 
 	 /** Read one or all of the TO-DO Items.
 	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
+	  * @return {TodoItem | Array.<TodoItem>} One or all of TO-DO items to read.
 	 */
 	 read({ id }) {}
 
@@ -35,6 +36,7 @@ class Todo {
 	 * @param {string} obj.property Name of the property you want to change. (required)
 	 * @param {string | boolean} obj.newValue New value of the property. (required)
 	 * @param {string} obj.tagName Name of the tag you want to change, if you want to change one of the tags. (optional)
+	 * @return {TodoItem} Updated TO-DO item.
 	*/
 	 update({ id, property, newValue, tagName}) {}
  
