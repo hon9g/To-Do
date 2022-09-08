@@ -14,6 +14,11 @@
  * @class
  */
 class Todo {
+	constructor() {
+		/** @type {Map<number:TodoItem>} */
+		this.list = new Map()
+	}
+
 	/** Add a TO-DO Item.
 	 * @param {TodoItem}
 	 * @return {boolean} About the creation was successful or not.
