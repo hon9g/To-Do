@@ -21,13 +21,11 @@ class Todo {
 
 	/** Add a TO-DO Item.
 	 * @param {TodoItem}
-	 * @return {boolean} About the creation was successful or not.
 	 */
 	 create({ id, description, isDone, category, tags }) {}
 
 	 /** Read one or all of the TO-DO Items.
 	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
-	  * @return {boolean} About the reading was successful or not.
 	 */
 	 read({ id }) {}
 
@@ -37,7 +35,6 @@ class Todo {
 	 * @param {string} obj.property Name of the property you want to change. (required)
 	 * @param {string | boolean} obj.newValue New value of the property. (required)
 	 * @param {string} obj.tagName Name of the tag you want to change, if you want to change one of the tags. (optional)
-	 * @return {boolean} About the updating was successful or not.
 	*/
 	 update({ id, property, newValue, tagName}) {}
  
@@ -46,7 +43,6 @@ class Todo {
 	  * @param {number} obj.id Unique number of the TO-DO Item. (required)
 	  * @param {boolean} obj.isTag Whether you want to delete one or all of the tags? (optional)
 	  * @param {string} obj.tagName Name of the tag, if you want to change one tag. (optional)
-	  * @return {boolean} About the delete operation was successful or not.
 	 */
 	 delete({id, isTag, tagName}) {}
 }
