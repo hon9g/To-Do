@@ -48,6 +48,9 @@ class Todo {
 	 * @return {TodoItem} Updated TO-DO item.
 	*/
 	 update({ id, property, newValue, tagName}) {
+		if (['description', 'isDone', 'category', 'tags'].includes(property)) {
+			throw new Error(`Invaild property: ${property}`)
+		}
 		if (property === 'tags') {
 			const nextTags = this.list.get(id)['tags'].filter(tag => tag !== tagName)
 			nextTags.push(newValue)
