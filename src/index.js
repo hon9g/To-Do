@@ -1,14 +1,21 @@
+// @ts-check
+
+/** TO-DO Item.
+ * @typedef {Object} TodoItem
+ * @property {number} id Unique number of the TO-DO Item.
+ * @property {string} description Description of the TO-DO Item.
+ * @property {boolean} isDone About the TO-DO Item completed or not.
+ * @property {string} category Category of the TO-DO Item.
+ * @property {Array.<string>} tags Tags of the TO-DO Item.
+*/
+
 /**
  * Represents a Todo App.
  * @class
  */
 class Todo {
 	/** Add a TO-DO Item.
-	 * @param {number} obj.id Unique number of the TO-DO Item. (required)
-	 * @param {string} obj.description Description of the TO-DO Item. (optional)
-	 * @param {boolean} obj.isDone About the TO-DO Item completed or not. (optional)
-	 * @param {string} obj.category Category of the TO-DO Item. (optional)
-	 * @param {Array.<string>} obj.tags Tags of the TO-DO Item. (optional)
+	 * @param {TodoItem}
 	 * @return {boolean} About the creation was successful or not.
 	 */
 	 create({ id, description, isDone, category, tags }) {}
