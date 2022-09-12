@@ -7,6 +7,7 @@
 		"docs": "jsdoc -c jsdoc.json"
 	},
 	"devDependencies": {
-		"jsdoc": "^3.6.11"
+		"jsdoc": "^3.6.11",
+		"typescript": "^4.8.3"
 	}
 }
