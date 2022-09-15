@@ -70,7 +70,7 @@ class Todo {
 		if ([PROPERTY_DESCRIPTION, PROPERTY_DESCRIPTION, PROPERTY_CATEGORY, PROPERTY_TAGS].includes(property)) {
 			throw new Error(`Invaild property: ${property}`)
 		}
-		if (PROPERTY_TAGS === property) {
+		if (PROPERTY_TAGS === property && typeof newValue === 'string') {
 			const nextTags = this.list.get(id)[PROPERTY_TAGS].filter(tag => tag !== tagName)
 			nextTags.push(newValue)
 			this.list.get(id)[PROPERTY_TAGS] = nextTags
