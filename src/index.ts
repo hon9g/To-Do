@@ -24,9 +24,8 @@ interface UpdateTodoItem extends Pick<TodoItem, TodoItemProps.ID> {
     tagName?: string // Name of the tag you want to change, if you want to change one of the tags.
 }
 
-interface DeleteTodoItem extends Pick<TodoItem, TodoItemProps.ID> {
-    isTag?: boolean // Whether you want to delete one or all of the tags?
-    tagName?: string // Name of the tag, if you want to change one tag.
+interface DeleteTodoItemTag extends Pick<TodoItem, TodoItemProps.ID> {
+    tagName: string // Name of the tag, if you want to change one tag.
 }
 
 class Todo {
@@ -85,20 +84,21 @@ class Todo {
 		return this.list.get(id)
 	 }
  
-	 delete({id, isTag, tagName}: DeleteTodoItem | any = {}) {
-		if (isTag && tagName) {
-			const nextTags = this.list.get(id)['tags'].filter(tag => tag !== tagName)
-			this.list.get(id)['tags'] = nextTags
-			return
-		}
-		if (isTag) {
-			this.list.get(id)['tags'] = []
-		}
-		if (id) {
-			this.list.delete(id)
-			return
-		}
+	 delete({ id }: Pick<TodoItem, TodoItemProps.ID>) {
+		this.list.delete(id)
+	 }
+
+	 deleteAll() {
 		this.list.clear()
+	 }
+
+	 deleteTag({id, tagName}: DeleteTodoItemTag) {
+		const nextTags = this.list.get(id)[TodoItemProps.TAGS].filter(tag => tag !== tagName)
+		this.list.get(id)[TodoItemProps.TAGS] = nextTags
+	 }
+
+	 deleteAllTag({ id }: Pick<TodoItem, TodoItemProps.ID>) {
+		this.list.get(id)[TodoItemProps.TAGS] = []
 	 }
 }
 
@@ -136,9 +136,8 @@ todo.update({
 
 console.log(todo.read({ id: 1 }))
 
-todo.delete({
+todo.deleteTag({
 	id: 1,
-	isTag: true,
 	tagName: 'b',
 })
 console.log(todo.readAll())
@@ -155,6 +154,6 @@ todo.create({
 
 console.log(todo.readAll())
 
-todo.delete()
+todo.deleteAll()
 
 console.log(todo.readAll())
