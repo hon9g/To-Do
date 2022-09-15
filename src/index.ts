@@ -49,10 +49,14 @@ class Todo {
 		}
 	 }
 
-	 read({ id }: Pick<TodoItem, TodoItemProps.ID> | any = {}): TodoItem | Array<TodoItem> {
-		if (id) {
-			return this.list.get(id)
+	 read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem {
+		if (!this.list.has) {
+			throw new Error(`invild id to read Todo Item: ${id}`)
 		}
+		return this.list.get(id)
+	 }
+
+	 readAll(): Array<TodoItem> {
 		return [...this.list.values()]
 	 }
 
@@ -116,7 +120,7 @@ todo.create({
 	tags: ['a2', 'b2', 'c2']
 })
 
-console.log(todo.read())
+console.log(todo.readAll())
 
 todo.update({
 	id: 1,
@@ -137,7 +141,7 @@ todo.delete({
 	isTag: true,
 	tagName: 'b',
 })
-console.log(todo.read())
+console.log(todo.readAll())
 
 todo.delete({ id: 1 })
 
@@ -149,8 +153,8 @@ todo.create({
 	tags: ['a3', 'b3', 'c3']
 })
 
-console.log(todo.read())
+console.log(todo.readAll())
 
 todo.delete()
 
-console.log(todo.read())
+console.log(todo.readAll())
