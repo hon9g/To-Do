@@ -49,7 +49,7 @@ class Todo {
 	 }
 
 	 read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem {
-		if (!this.list.has) {
+		if (!this.list.has(id)) {
 			throw new Error(`invild id to read Todo Item: ${id}`)
 		}
 		return this.list.get(id)
