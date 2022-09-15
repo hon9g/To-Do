@@ -1,40 +1,30 @@
-/** @typedef {'description'} PROPERTY_DESCRIPTION */
-/** @typedef {'isDone'} PROPERTY_ISDONE */
-/** @typedef {'category'} PROPERTY_CATEGORY */
-/** @typedef {'tags'} PROPERTY_TAGS */
-/** @typedef {PROPERTY_DESCRIPTION | PROPERTY_DESCRIPTION | PROPERTY_CATEGORY | PROPERTY_TAGS} Property */
 /** @typedef {'general'} DEFAULT_CATEGORY */
-
-/** @type {PROPERTY_DESCRIPTION} */
-const PROPERTY_DESCRIPTION = 'description'
-
-/** @type {PROPERTY_ISDONE} */
-const PROPERTY_ISDONE = 'isDone'
-
-/** @type {PROPERTY_CATEGORY} */
-const PROPERTY_CATEGORY = 'category'
-
-/** @type {PROPERTY_TAGS} */
-const PROPERTY_TAGS = 'tags'
 
 /** @type {DEFAULT_CATEGORY} */
 const DEFAULT_CATEGORY = 'general'
 
+enum TodoItemProps {
+	ID = 'id',
+	DESCRIPTION = 'description',
+	IS_DONE = 'isDone',
+	CATEGORY = 'category',
+	TAGS = 'tags'
+}
 interface TodoItem {
-    id: number // Unique number of the TO-DO Item.
-    description: string // Description of the TO-DO Item.
-    isDone: boolean // About the TO-DO Item completed or not.
-    category: string // Category of the TO-DO Item.
-    tags: Array<string> // Tags of the TO-DO Item.
+    [TodoItemProps.ID]: number // Unique number of the TO-DO Item.
+    [TodoItemProps.DESCRIPTION]: string // Description of the TO-DO Item.
+    [TodoItemProps.IS_DONE]: boolean // About the TO-DO Item completed or not.
+    [TodoItemProps.CATEGORY]: string // Category of the TO-DO Item.
+    [TodoItemProps.TAGS]: Array<string> // Tags of the TO-DO Item.
 }
 
-interface UpdateTodoItem extends Pick<TodoItem, 'id'> {
-    property: string // Name of the property you want to change.
+interface UpdateTodoItem extends Pick<TodoItem, TodoItemProps.ID> {
+    property: Exclude<TodoItemProps, TodoItemProps.ID> // Name of the property you want to change.
     newValue: string | boolean // New value of the property.
     tagName?: string // Name of the tag you want to change, if you want to change one of the tags.
 }
 
-interface DeleteTodoItem extends Pick<TodoItem, 'id'> {
+interface DeleteTodoItem extends Pick<TodoItem, TodoItemProps.ID> {
     isTag?: boolean // Whether you want to delete one or all of the tags?
     tagName?: string // Name of the tag, if you want to change one tag.
 }
@@ -59,7 +49,7 @@ class Todo {
 		}
 	 }
 
-	 read({ id }: Pick<TodoItem, 'id'> | any = {}): TodoItem | Array<TodoItem> {
+	 read({ id }: Pick<TodoItem, TodoItemProps.ID> | any = {}): TodoItem | Array<TodoItem> {
 		if (id) {
 			return this.list.get(id)
 		}
@@ -67,15 +57,26 @@ class Todo {
 	 }
 
 	 update({ id, property, newValue, tagName}: UpdateTodoItem): TodoItem {
-		if ([PROPERTY_DESCRIPTION, PROPERTY_DESCRIPTION, PROPERTY_CATEGORY, PROPERTY_TAGS].includes(property)) {
-			throw new Error(`Invaild property: ${property}`)
-		}
-		if (PROPERTY_TAGS === property && typeof newValue === 'string') {
-			const nextTags = this.list.get(id)[PROPERTY_TAGS].filter(tag => tag !== tagName)
-			nextTags.push(newValue)
-			this.list.get(id)[PROPERTY_TAGS] = nextTags
-		} else {
-			this.list.get(id)[property] = newValue
+		switch(property) {
+			case TodoItemProps.TAGS:
+				if (typeof newValue === 'string') {
+					const nextTags = this.list.get(id)[TodoItemProps.TAGS].filter(tag => tag !== tagName)
+					nextTags.push(newValue)
+					this.list.get(id)[TodoItemProps.TAGS] = nextTags
+				}
+				break
+			case TodoItemProps.IS_DONE:
+				if (typeof newValue === 'boolean') {
+					this.list.get(id)[TodoItemProps.IS_DONE] = newValue
+				}
+				break
+			case TodoItemProps.CATEGORY || TodoItemProps.DESCRIPTION:
+				if (typeof newValue === 'string') {
+					this.list.get(id)[property] = newValue
+				}
+				break
+			default:
+				throw new Error(`Invaild property to update Todo Item: ${property}`)
 		}
 		return this.list.get(id)
 	 }
@@ -119,13 +120,13 @@ console.log(todo.read())
 
 todo.update({
 	id: 1,
-	property: 'tags',
+	property: TodoItemProps.TAGS,
 	newValue: 'd',
 	tagName: 'a',
 })
 todo.update({
 	id: 1,
-	property: 'isDone',
+	property: TodoItemProps.IS_DONE,
 	newValue: true,
 })
 
