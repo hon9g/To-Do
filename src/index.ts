@@ -1,8 +1,3 @@
-/** @typedef {'general'} DEFAULT_CATEGORY */
-
-/** @type {DEFAULT_CATEGORY} */
-const DEFAULT_CATEGORY = 'general'
-
 enum TodoItemProps {
 	ID = 'id',
 	DESCRIPTION = 'description',
@@ -10,6 +5,11 @@ enum TodoItemProps {
 	CATEGORY = 'category',
 	TAGS = 'tags'
 }
+
+enum TodoItemCategory {
+	default = 'general',
+}
+
 interface TodoItem {
     [TodoItemProps.ID]: number // Unique number of the TO-DO Item.
     [TodoItemProps.DESCRIPTION]: string // Description of the TO-DO Item.
@@ -43,7 +43,7 @@ class Todo {
 				id,
 				description: description ?? '',
 				isDone: isDone ?? false,
-				category: category ?? DEFAULT_CATEGORY,
+				category: category ?? TodoItemCategory.default,
 				tags: tags ?? [],
 			})
 		}
