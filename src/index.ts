@@ -1,5 +1,3 @@
-// @ts-check
-
 /** @typedef {'description'} PROPERTY_DESCRIPTION */
 /** @typedef {'isDone'} PROPERTY_ISDONE */
 /** @typedef {'category'} PROPERTY_CATEGORY */
