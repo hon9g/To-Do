@@ -38,13 +38,14 @@ class Todo {
 
 	 create({ id, description, isDone, category, tags }: TodoItem) {
 		if (!this.list.has(id)) {
-			this.list.set(id, { 
+            const todoItem: TodoItem = {
 				id,
 				description: description ?? '',
 				isDone: isDone ?? false,
 				category: category ?? TodoItemCategory.default,
 				tags: tags ?? [],
-			})
+            }
+			this.list.set(id, todoItem)
 		}
 	 }
 
@@ -60,22 +61,26 @@ class Todo {
 	 }
 
 	 update({ id, property, newValue, tagName}: UpdateTodoItem): TodoItem | void {
+        const todoItem: TodoItem | undefined = this.list.get(id)
+        if (!todoItem) {
+            throw new Error(`No Todo Item with id: ${id}`)
+        }
 		switch(property) {
 			case TodoItemProps.TAGS:
 				if (typeof newValue === 'string') {
-					const nextTags = this.list.get(id)[TodoItemProps.TAGS].filter(tag => tag !== tagName)
+					const nextTags = todoItem[TodoItemProps.TAGS].filter(tag => tag !== tagName)
 					nextTags.push(newValue)
-					this.list.get(id)[TodoItemProps.TAGS] = nextTags
+					todoItem[TodoItemProps.TAGS] = nextTags
 				}
 				break
 			case TodoItemProps.IS_DONE:
 				if (typeof newValue === 'boolean') {
-					this.list.get(id)[TodoItemProps.IS_DONE] = newValue
+					todoItem[TodoItemProps.IS_DONE] = newValue
 				}
 				break
 			case TodoItemProps.CATEGORY || TodoItemProps.DESCRIPTION:
 				if (typeof newValue === 'string') {
-					this.list.get(id)[property] = newValue
+					todoItem[property] = newValue
 				}
 				break
 			default:
@@ -93,12 +98,17 @@ class Todo {
 	 }
 
 	 deleteTag({id, tagName}: DeleteTodoItemTag) {
-		const nextTags = this.list.get(id)[TodoItemProps.TAGS].filter(tag => tag !== tagName)
-		this.list.get(id)[TodoItemProps.TAGS] = nextTags
+		const todoItem: TodoItem | undefined = this.list.get(id)
+		if (!todoItem) {
+			throw Error(`No Todo Item with id: ${id}`)
+		}
+		const nextTags = todoItem[TodoItemProps.TAGS].filter(tag => tag !== tagName)
+		todoItem[TodoItemProps.TAGS] = nextTags
 	 }
 
 	 deleteAllTag({ id }: Pick<TodoItem, TodoItemProps.ID>) {
-		this.list.get(id)[TodoItemProps.TAGS] = []
+		const todoItem: TodoItem | undefined = this.list.get(id)
+		todoItem[TodoItemProps.TAGS] = []
 	 }
 }
 
