@@ -20,30 +20,34 @@ const PROPERTY_TAGS = 'tags'
 /** @type {DEFAULT_CATEGORY} */
 const DEFAULT_CATEGORY = 'general'
 
+interface TodoItem {
+    id: number // Unique number of the TO-DO Item.
+    description: string // Description of the TO-DO Item.
+    isDone: boolean // About the TO-DO Item completed or not.
+    category: string // Category of the TO-DO Item.
+    tags: Array<string> // Tags of the TO-DO Item.
+}
 
-/** TO-DO Item.
- * @typedef {Object} TodoItem
- * @property {number} id Unique number of the TO-DO Item.
- * @property {string} description Description of the TO-DO Item.
- * @property {boolean} isDone About the TO-DO Item completed or not.
- * @property {string} category Category of the TO-DO Item.
- * @property {Array.<string>} tags Tags of the TO-DO Item.
-*/
+interface UpdateTodoItem extends Pick<TodoItem, 'id'> {
+    property: string // Name of the property you want to change.
+    newValue: string | boolean // New value of the property.
+    tagName?: string // Name of the tag you want to change, if you want to change one of the tags.
+}
 
-/**
- * Represents a Todo App.
- * @class
- */
+interface DeleteTodoItem extends Pick<TodoItem, 'id'> {
+    isTag?: boolean // Whether you want to delete one or all of the tags?
+    tagName?: string // Name of the tag, if you want to change one tag.
+}
+
 class Todo {
+    list: Map<number, TodoItem>
+
 	constructor() {
 		/** @type {Map<number:TodoItem>} */
 		this.list = new Map()
 	}
 
-	/** Add a TO-DO Item.
-	 * @param {TodoItem}
-	 */
-	 create({ id, description, isDone, category, tags }) {
+	 create({ id, description, isDone, category, tags }: TodoItem) {
 		if (!this.list.has(id)) {
 			this.list.set(id, { 
 				id,
@@ -55,26 +59,14 @@ class Todo {
 		}
 	 }
 
-	 /** Read one or all of the TO-DO Items.
-	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
-	  * @return {TodoItem | Array.<TodoItem>} One or all of TO-DO items to read.
-	 */
-	 read({ id } = {}) {
+	 read({ id }: Pick<TodoItem, 'id'> | any = {}): TodoItem | Array<TodoItem> {
 		if (id) {
 			return this.list.get(id)
 		}
 		return [...this.list.values()]
 	 }
 
-	/** Change one of property of the TO-DO item.
-	 * Also can change one tag item of the TO-DO item.
-	 * @param {number} obj.id Unique number of the TO-DO Item. (required)
-	 * @param {Property} obj.property Name of the property you want to change. (required)
-	 * @param {string | boolean} obj.newValue New value of the property. (required)
-	 * @param {string} obj.tagName Name of the tag you want to change, if you want to change one of the tags. (optional)
-	 * @return {TodoItem} Updated TO-DO item.
-	*/
-	 update({ id, property, newValue, tagName}) {
+	 update({ id, property, newValue, tagName}: UpdateTodoItem): TodoItem {
 		if ([PROPERTY_DESCRIPTION, PROPERTY_DESCRIPTION, PROPERTY_CATEGORY, PROPERTY_TAGS].includes(property)) {
 			throw new Error(`Invaild property: ${property}`)
 		}
@@ -88,13 +80,7 @@ class Todo {
 		return this.list.get(id)
 	 }
  
-	 /** Remove one or all of the TO-DO items. 
-	  * Also remove one tag or all of the tags of the TO-DO Item.
-	  * @param {number} obj.id Unique number of the TO-DO Item. (optional)
-	  * @param {boolean} obj.isTag Whether you want to delete one or all of the tags? (optional)
-	  * @param {string} obj.tagName Name of the tag, if you want to change one tag. (optional)
-	 */
-	 delete({id, isTag, tagName} = {}) {
+	 delete({id, isTag, tagName}: DeleteTodoItem | any = {}) {
 		if (isTag && tagName) {
 			const nextTags = this.list.get(id)['tags'].filter(tag => tag !== tagName)
 			this.list.get(id)['tags'] = nextTags
