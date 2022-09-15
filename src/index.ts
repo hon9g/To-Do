@@ -32,7 +32,6 @@ class Todo {
     list: Map<number, TodoItem>
 
 	constructor() {
-		/** @type {Map<number:TodoItem>} */
 		this.list = new Map()
 	}
 
