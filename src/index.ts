@@ -48,7 +48,7 @@ class Todo {
 		}
 	 }
 
-	 read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem {
+	 read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem | void {
 		if (!this.list.has(id)) {
 			throw new Error(`invild id to read Todo Item: ${id}`)
 		}
@@ -59,7 +59,7 @@ class Todo {
 		return [...this.list.values()]
 	 }
 
-	 update({ id, property, newValue, tagName}: UpdateTodoItem): TodoItem {
+	 update({ id, property, newValue, tagName}: UpdateTodoItem): TodoItem | void {
 		switch(property) {
 			case TodoItemProps.TAGS:
 				if (typeof newValue === 'string') {
