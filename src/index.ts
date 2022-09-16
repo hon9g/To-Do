@@ -29,7 +29,7 @@ interface DeleteTodoItemTag extends Pick<TodoItem, TodoItemProps.ID> {
 }
 
 class Todo {
-    list: Map<number, TodoItem>
+    list: Map<TodoItem[TodoItemProps.ID], TodoItem>
 
 	constructor() {
 		this.list = new Map()
