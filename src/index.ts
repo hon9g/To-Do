@@ -107,6 +107,9 @@ class Todo {
 
 	 deleteAllTag({ id }: Pick<TodoItem, TodoItemProps.ID>) {
 		const todoItem: TodoItem | undefined = this.list.get(id)
+		if (!todoItem) {
+			throw Error(`No Todo Item with id: ${id}`)
+		}
 		todoItem[TodoItemProps.TAGS] = []
 	 }
 }
