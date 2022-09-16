@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "downlevelIteration": true,
+      "target": "es2016",
+      "outDir": "./dist",
+      "moduleResolution": "Node",
+      "lib": ["es2016", "DOM", "DOM.Iterable"]
+    },
+    "include": ["./src/**/*"],
+    "exclude": ["node_modules", "dist", "docs"]
+  }
+  

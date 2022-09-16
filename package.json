@@ -3,10 +3,8 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
-	"scripts": {
-		"docs": "jsdoc -c jsdoc.json"
-	},
+	"scripts": {},
 	"devDependencies": {
-		"jsdoc": "^3.6.11"
+		"typescript": "^4.8.3"
 	}
 }
