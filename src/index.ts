@@ -35,7 +35,7 @@ class Todo {
 		this.list = new Map()
 	}
 
-	 create({ id, description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.ID> & Partial<TodoItem>) {
+	 create({ id, description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.ID | TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
 		if (!this.list.has(id)) {
             const todoItem: TodoItem = {
 				id,
@@ -126,6 +126,7 @@ todo.create({
 })
 todo.create({
 	id: 2,
+	description: 'zZZ',
 })
 
 console.log(todo.readAll())
