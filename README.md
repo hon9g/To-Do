@@ -1,6 +1,6 @@
-# TO-DO App Modeling
+# TO-DO App
 
-TO-DO 앱에 필요한 데이터를 우선JS-Doc으로 모델링한 뒤, 구현한 프로젝트입니다.
+TO-DO 앱에 필요한 데이터를 TS로 모델링하고 구현한 프로젝트입니다.
 
 ## Todo
 ```JavaScript
