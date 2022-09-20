@@ -166,3 +166,5 @@ console.log(todo.readAll())
 todo.deleteAll()
 
 console.log(todo.readAll())
+
+export default Todo

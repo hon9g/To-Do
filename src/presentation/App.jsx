@@ -1,5 +1,8 @@
 import React, { Component } from "react"
-import { hot } from "react-hot-loader"
+
+import Todo from "../domain/index.ts"
+
+console.log(new Todo())
 
 class App extends Component{
   render(){
@@ -11,4 +14,4 @@ class App extends Component{
   }
 }
 
-export default hot(module)(App)
+export default App;
