@@ -3,7 +3,7 @@ const path = require("path");
 const webpack = require("webpack")
 
 module.exports = {
-  entry: "./index.js",
+  entry: "./index",
   context: path.resolve(__dirname, '../src'),
   resolve: { extensions: [".js", ".jsx", ".ts", ".tsx"] },
   module: {

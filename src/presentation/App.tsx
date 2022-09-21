@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import Todo from "../domain/index.ts"
+import Todo from "../domain/index"
 
 console.log(new Todo())
 
