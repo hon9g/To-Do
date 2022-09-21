@@ -3,7 +3,7 @@ import React from "react"
 interface Props {
     label: string
     isChecked: boolean
-    value: string
+    value: any
 }
 
 const Checkbox = ({ label, isChecked, value }: Props) => {

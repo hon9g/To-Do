@@ -10,7 +10,7 @@ enum TodoItemCategory {
 	default = 'general',
 }
 
-interface TodoItem {
+export interface TodoItem {
     [TodoItemProps.ID]: number // Unique number of the TO-DO Item.
     [TodoItemProps.DESCRIPTION]: string // Description of the TO-DO Item.
     [TodoItemProps.IS_DONE]: boolean // About the TO-DO Item completed or not.

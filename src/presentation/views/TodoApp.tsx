@@ -1,14 +1,19 @@
 import React from "react"
 
+import { TodoItem } from "../../domain/TodoList"
 import List from "../components/List"
 import Checkbox from "../components/Checkbox"
 
-const App = () => {
+interface Props {
+    data: Array<TodoItem>
+}
+
+const App = ({ data }: Props) => {
     return (
         <>
         <h1>To ~ do ~ !</h1>
         <List>
-            {['1', '2', '3', '4'].map(x => <Checkbox label={x} value={x} isChecked={false} />)}
+            {data.map(todoItem => <Checkbox label={todoItem.description} value={todoItem.id} isChecked={todoItem.isDone} />)}
         </List>
         </>
     )
