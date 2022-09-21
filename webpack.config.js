@@ -5,7 +5,5 @@ const argv = require("yargs").argv;
 
 module.exports = () => {
   const envConfig = require(`./webpack/webpack.${argv.env}.js`);
-
-  console.log(merge(commonConfig, envConfig))
   return merge(commonConfig, envConfig);
 };
