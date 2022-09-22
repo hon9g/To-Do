@@ -11,7 +11,7 @@ enum TodoItemCategory {
 }
 
 export interface TodoItem {
-    [TodoItemProps.ID]: number // Unique number of the TO-DO Item.
+    [TodoItemProps.ID]: Date // Unique number of the TO-DO Item.
     [TodoItemProps.DESCRIPTION]: string // Description of the TO-DO Item.
     [TodoItemProps.IS_DONE]: boolean // About the TO-DO Item completed or not.
     [TodoItemProps.CATEGORY]: string // Category of the TO-DO Item.
@@ -35,17 +35,15 @@ class Todo {
 		this.list = new Map()
 	}
 
-	 create({ id, description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.ID | TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
-		if (!this.list.has(id)) {
-            const todoItem: TodoItem = {
-				id,
-				description: description ?? '',
-				isDone: isDone ?? false,
-				category: category ?? TodoItemCategory.default,
-				tags: tags ?? [],
-            }
-			this.list.set(id, todoItem)
+	 create({ id, description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
+		const todoItem: TodoItem = {
+			id: new Date(),
+			description: description,
+			isDone: isDone ?? false,
+			category: category ?? TodoItemCategory.default,
+			tags: tags ?? [],
 		}
+		this.list.set(id, todoItem)
 	 }
 
 	 read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem | void {
