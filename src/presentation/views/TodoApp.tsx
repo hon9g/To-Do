@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-import Todo, { TodoItem } from "../../domain/TodoList"
+import Todo, { TodoItemProps } from "../../domain/TodoList"
 import Button from "../components/Button"
 import Checkbox from "../components/Checkbox"
 import List from "../components/List"
@@ -19,7 +19,19 @@ const App = ({ model }: Props) => {
         <>
         <h1>To ~ do ~ !</h1>
         <List>
-            {todoList.map(todoItem => <Checkbox label={todoItem.description} value={todoItem.id} isChecked={todoItem.isDone} />)}
+            {todoList.map(todoItem => <Checkbox
+                label={todoItem.description}
+                value={todoItem.id}
+                isChecked={todoItem.isDone}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    model.update({
+                        [TodoItemProps.ID]: todoItem.id,
+                        property: TodoItemProps.IS_DONE,
+                        newValue: event.target.checked,
+                    })
+                    setTodoList(model.readAll())
+                }}
+                />)}
         </List>
         <Button onClick={addTodoItem} label="할 일 추가" />
         </>

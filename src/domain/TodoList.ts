@@ -1,4 +1,4 @@
-enum TodoItemProps {
+export enum TodoItemProps {
 	ID = 'id',
 	DESCRIPTION = 'description',
 	IS_DONE = 'isDone',
