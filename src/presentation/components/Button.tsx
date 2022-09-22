@@ -3,16 +3,19 @@ import React from "react"
 type Url = string
 
 interface Props {
-    onClick: Function
+    onClick: (event?: React.MouseEvent<HTMLButtonElement>) => void
     label?: string
     icon?: Url
 }
 
 const Button = ({ onClick, label, icon }: Props) => {
+    const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        onClick(event);
+    }
     return (
-        <div>
+        <button onClick={handleOnClick} >
             { label ?? 'X' }
-        </div>
+        </button>
     )
 }
 

@@ -1,8 +1,9 @@
 import React from "react"
 
 import { TodoItem } from "../../domain/TodoList"
-import List from "../components/List"
+import Button from "../components/Button"
 import Checkbox from "../components/Checkbox"
+import List from "../components/List"
 
 interface Props {
     data: Array<TodoItem>
@@ -15,6 +16,7 @@ const App = ({ data }: Props) => {
         <List>
             {data.map(todoItem => <Checkbox label={todoItem.description} value={todoItem.id} isChecked={todoItem.isDone} />)}
         </List>
+        <Button onClick={() => {console.log('click')}} label="할 일 추가" />
         </>
     )
 }
