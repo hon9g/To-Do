@@ -1,6 +1,26 @@
 # TO-DO App
 
 TO-DO 앱에 필요한 데이터를 TS로 모델링하고 구현한 프로젝트입니다.
+현재 UI를 통해 할 일을 추가하고, 완료여부를 업데이트 할 수 있습니다.
+
+## Install
+
+```bash
+npm install
+or
+yarn
+```
+
+## Run w/ Dev env
+```bash
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
 
 ## Todo
 ```JavaScript
@@ -36,24 +56,6 @@ Todo {
 ### deleteAllTag
 - 특정 할 일의 모든 태그를 제거할 수 있다.
 
-## Install
-
-```bash
-npm install
-or
-yarn
-```
-
-## Build
-
-```bash
-npx tsc
-```
-
-## Run
-```bash
-node ./dist/index.js
-```
 
 #### Reference
 - [jsdoc.app](https://jsdoc.app)
