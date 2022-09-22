@@ -35,9 +35,10 @@ class Todo {
 		this.list = new Map()
 	}
 
-	 create({ id, description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
+	 create({ description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
+		const id = new Date()
 		const todoItem: TodoItem = {
-			id: new Date(),
+			id,
 			description: description,
 			isDone: isDone ?? false,
 			category: category ?? TodoItemCategory.default,
