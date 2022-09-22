@@ -10,7 +10,8 @@ interface Props {
 
 const Button = ({ onClick, label, icon }: Props) => {
     const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        onClick(event);
+        onClick(event)
+        console.log("click")
     }
     return (
         <button onClick={handleOnClick} >
