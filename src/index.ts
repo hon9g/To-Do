@@ -13,4 +13,4 @@ todoList.create({
 	isDone: true,
 })
 
-view(todoList.readAll())
+view({ model: todoList })
