@@ -1,12 +1,14 @@
 {
     "compilerOptions": {
-      "downlevelIteration": true,
-      "target": "es2016",
-      "outDir": "./dist",
-      "moduleResolution": "Node",
-      "lib": ["es2016", "DOM", "DOM.Iterable"]
+      "jsx": "react-jsx",
+      "lib": ["es2016", "DOM", "DOM.Iterable"],
+      "module": "ESNext",
+      "moduleResolution": "node",
+      "outDir": "dist",
+      "target": "ESNext",
+      "sourceMap": true,
+      "allowSyntheticDefaultImports": true,
     },
-    "include": ["./src/**/*"],
-    "exclude": ["node_modules", "dist", "docs"]
+    "include": ["src"],
   }
   

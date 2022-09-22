@@ -1,6 +1,26 @@
 # TO-DO App
 
 TO-DO 앱에 필요한 데이터를 TS로 모델링하고 구현한 프로젝트입니다.
+현재 UI를 통해 할 일을 추가하고, 완료여부를 업데이트 할 수 있습니다.
+
+## Install
+
+```bash
+npm install
+or
+yarn
+```
+
+## Run w/ Dev env
+```bash
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
 
 ## Todo
 ```JavaScript
@@ -36,24 +56,14 @@ Todo {
 ### deleteAllTag
 - 특정 할 일의 모든 태그를 제거할 수 있다.
 
-## Install
-
-```bash
-npm install
-or
-yarn
-```
-
-## Build
-
-```bash
-npx tsc
-```
-
-## Run
-```bash
-node ./dist/index.js
-```
+## Next To-do
+추후에 다음과 같은 피쳐를 추가하려고 합니다. 우선순위가 높은 것부터 차례대로 나열했습니다.
+1. 할 일 아이템을 삭제할 수 있다. (삭제는 edit 화면에서 한다.)
+2. 사용자 localStorage에 할일 목록을 저장해두어, 웹사이트에 재접속 했을 때 데이터가 유지되도록 한다.
+3. 사용자가 할 일 아이템의 카테고리와 태그를 설정 할 수 있다.
+할 일 목록을 카테고리 별로 나누어 볼 수 있다.
+4. 할 일 아이템에 태그를 노출한다. 
+5. 할 일 아이템의 순서를 변경할 있다.
 
 #### Reference
 - [jsdoc.app](https://jsdoc.app)
