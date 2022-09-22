@@ -1,17 +1,16 @@
-import view from './presentation/index'
+import TodoModel from "./domain/TodoList"
+import view from "./presentation/index"
 
-const data = [{
-	id: 1,
-	description: 'abc',
-	isDone: false,
-	category: 'general',
-	tags: ['en', 'zZZ']
-},{
-	id: 2,
-	description: 'ㄱㄴㄷ',
+const todoList = new TodoModel()
+todoList.create({
+	description: "첫번째 할 일",
+})
+todoList.create({
+	description: "두번째 할 일",
+})
+todoList.create({
+	description: "세번째 할 일",
 	isDone: true,
-	category: 'general',
-	tags: ['ko', 'zZZ']
-}]
+})
 
-view(data)
+view(todoList.readAll())
