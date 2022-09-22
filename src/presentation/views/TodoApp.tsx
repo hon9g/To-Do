@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 
 import Todo, { TodoItemProps } from "../../domain/TodoList"
-import Button from "../components/Button"
 import Checkbox from "../components/Checkbox"
 import List from "../components/List"
+import TextInput from "../components/TextInput"
 
 interface Props {
     model: Todo
@@ -11,9 +11,18 @@ interface Props {
 
 const App = ({ model }: Props) => {
     const [todoList, setTodoList] = useState(model.readAll())
+    const [newTodoDescription, setNewTodoDescription] = useState('')
     const addTodoItem = () => {
-        model.create({ description: "새 할일" })
+        if (!newTodoDescription.length) {
+            alert('무슨 할 일을 해야하나요? 할 일에 대해 1 글자 이상 입력해주세요.')
+            return
+        }
+        model.create({ description: newTodoDescription })
         setTodoList(model.readAll())
+        setNewTodoDescription('')
+    }
+    const onChangeNewTodoDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewTodoDescription(event.target.value)
     }
     return (
         <>
@@ -33,7 +42,11 @@ const App = ({ model }: Props) => {
                 }}
                 />)}
         </List>
-        <Button onClick={addTodoItem} label="할 일 추가" />
+        <TextInput
+            value={newTodoDescription}
+            onChange={onChangeNewTodoDescription}
+            onSubmit={addTodoItem}
+        />
         </>
     )
 }
