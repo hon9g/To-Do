@@ -6,6 +6,20 @@ import Checkbox from "../components/Checkbox"
 import List from "../components/List"
 import TextInput from "../components/TextInput"
 
+enum PAGE_CONTENTS {
+    TITLE = 'To ~ Do ~! ~!',
+    TITLE_EDIT = '수정',
+    BTN_ADD_TODO_ITEM = '추가',
+    NOTICE_BACK_TO_HOME = '돌아가기',
+    NOTICE_CREATE_TODO_ITEM = '무슨 할 일을 해야하나요? 할 일에 대해 1 글자 이상 입력해주세요.'
+}
+
+enum PATH {
+    HOME = '/',
+    EDIT = '/edit',
+}
+
+
 interface Props {
     model: Todo
 }
@@ -15,7 +29,7 @@ const Main = ({ model }: Props) => {
     const [newTodoDescription, setNewTodoDescription] = useState('')
     const addTodoItem = () => {
         if (!newTodoDescription.length) {
-            alert('무슨 할 일을 해야하나요? 할 일에 대해 1 글자 이상 입력해주세요.')
+            alert(PAGE_CONTENTS.NOTICE_CREATE_TODO_ITEM)
             return
         }
         model.create({ description: newTodoDescription })
@@ -27,7 +41,7 @@ const Main = ({ model }: Props) => {
     }
     return (
     <>
-    <Link to="/edit">수정</Link>
+    <Link to={PATH.EDIT}>{PAGE_CONTENTS.TITLE_EDIT}</Link>
     <List>
         {todoList.map(todoItem => <Checkbox
             label={todoItem.description}
@@ -48,6 +62,7 @@ const Main = ({ model }: Props) => {
         value={newTodoDescription}
         onChange={onChangeNewTodoDescription}
         onSubmit={addTodoItem}
+        label={PAGE_CONTENTS.BTN_ADD_TODO_ITEM}
     />
     </>
     )
@@ -57,7 +72,7 @@ const Edit = ({ model }: Props) => {
     const [todoList, setTodoList] = useState(model.readAll())
     return (
     <>
-    <Link to="/">돌아가기</Link>
+    <Link to={PATH.HOME}>{PAGE_CONTENTS.NOTICE_BACK_TO_HOME}</Link>
     <List>
         {todoList.map(todoItem => <Checkbox
             label={todoItem.description}
@@ -82,10 +97,10 @@ const Edit = ({ model }: Props) => {
 const App = ({ model }: Props) => {
     return (
         <>
-        <h1>To ~ do ~ !</h1>
+        <h1>{PAGE_CONTENTS.TITLE}</h1>
         <Routes>
-            <Route path="/" element={<Main model={model} />} />
-            <Route path="/edit" element={<Edit model={model} />} />
+            <Route path={PATH.HOME} element={<Main model={model} />} />
+            <Route path={PATH.EDIT} element={<Edit model={model} />} />
         </Routes>
         </>
     )
