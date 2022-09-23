@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom"
 
 import Todo, { TodoItemProps } from "../../domain/TodoList"
 import Checkbox from "../components/Checkbox"
@@ -27,6 +27,7 @@ const Main = ({ model }: Props) => {
     }
     return (
     <>
+    <Link to="/edit">수정</Link>
     <List>
         {todoList.map(todoItem => <Checkbox
             label={todoItem.description}
@@ -56,6 +57,7 @@ const Edit = ({ model }: Props) => {
     const [todoList, setTodoList] = useState(model.readAll())
     return (
     <>
+    <Link to="/">돌아가기</Link>
     <List>
         {todoList.map(todoItem => <Checkbox
             label={todoItem.description}
