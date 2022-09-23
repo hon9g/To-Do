@@ -53,7 +53,28 @@ const Main = ({ model }: Props) => {
 }
 
 const Edit = ({ model }: Props) => {
-    return <h3>on Edit Mode</h3>
+    const [todoList, setTodoList] = useState(model.readAll())
+    return (
+    <>
+    <List>
+        {todoList.map(todoItem => <Checkbox
+            label={todoItem.description}
+            value={todoItem.id}
+            isChecked={todoItem.isDone}
+            isDisabled={true}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                model.update({
+                    [TodoItemProps.ID]: todoItem.id,
+                    property: TodoItemProps.IS_DONE,
+                    newValue: event.target.checked,
+                })
+                setTodoList(model.readAll())
+            }}
+            key={todoItem.id.toString()}
+            />)}
+    </List>
+    </>
+    )
 }
 
 const App = ({ model }: Props) => {
