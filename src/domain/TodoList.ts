@@ -29,13 +29,13 @@ interface DeleteTodoItemTag extends Pick<TodoItem, TodoItemProps.ID> {
 }
 
 class TodoList {
-    list: Map<TodoItem[TodoItemProps.ID], TodoItem>
+    private list: Map<TodoItem[TodoItemProps.ID], TodoItem>
 
 	constructor() {
 		this.list = new Map()
 	}
 
-	 create({ description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
+	public create({ description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
 		const id = new Date()
 		const todoItem: TodoItem = {
 			id,
@@ -45,20 +45,20 @@ class TodoList {
 			tags: tags ?? [],
 		}
 		this.list.set(id, todoItem)
-	 }
+	}
 
-	 read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem | void {
+	public read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem | void {
 		if (!this.list.has(id)) {
 			throw new Error(`invild id to read Todo Item: ${id}`)
 		}
 		return this.list.get(id)
-	 }
+	}
 
-	 readAll(): Array<TodoItem> {
+	public readAll(): Array<TodoItem> {
 		return [...this.list.values()]
-	 }
+	}
 
-	 update({ id, property, newValue, tagName}: UpdateTodoItem): TodoItem | void {
+	public update({ id, property, newValue, tagName}: UpdateTodoItem): TodoItem | void {
         const todoItem: TodoItem | undefined = this.list.get(id)
         if (!todoItem) {
             throw new Error(`No Todo Item with id: ${id}`)
@@ -85,32 +85,32 @@ class TodoList {
 				throw new Error(`Invaild property to update Todo Item: ${property}`)
 		}
 		return this.list.get(id)
-	 }
+	}
  
-	 delete({ id }: Pick<TodoItem, TodoItemProps.ID>) {
+	public delete({ id }: Pick<TodoItem, TodoItemProps.ID>) {
 		this.list.delete(id)
-	 }
+	}
 
-	 deleteAll() {
+	public deleteAll() {
 		this.list.clear()
-	 }
+	}
 
-	 deleteTag({id, tagName}: DeleteTodoItemTag) {
+	public deleteTag({id, tagName}: DeleteTodoItemTag) {
 		const todoItem: TodoItem | undefined = this.list.get(id)
 		if (!todoItem) {
 			throw Error(`No Todo Item with id: ${id}`)
 		}
 		const nextTags = todoItem[TodoItemProps.TAGS].filter(tag => tag !== tagName)
 		todoItem[TodoItemProps.TAGS] = nextTags
-	 }
+	}
 
-	 deleteAllTag({ id }: Pick<TodoItem, TodoItemProps.ID>) {
+	public deleteAllTag({ id }: Pick<TodoItem, TodoItemProps.ID>) {
 		const todoItem: TodoItem | undefined = this.list.get(id)
 		if (!todoItem) {
 			throw Error(`No Todo Item with id: ${id}`)
 		}
 		todoItem[TodoItemProps.TAGS] = []
-	 }
+	}
 }
 
 export default TodoList
