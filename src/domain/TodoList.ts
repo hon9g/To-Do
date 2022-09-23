@@ -1,3 +1,5 @@
+import { TodoListRepository } from "../infrastructure/repository/TodoList"
+
 export enum TodoItemProps {
 	ID = 'id',
 	DESCRIPTION = 'description',
@@ -11,7 +13,7 @@ enum TodoItemCategory {
 }
 
 export interface TodoItem {
-    [TodoItemProps.ID]: Date // Unique number of the TO-DO Item.
+    [TodoItemProps.ID]: Date // Unique string of the TO-DO Item.
     [TodoItemProps.DESCRIPTION]: string // Description of the TO-DO Item.
     [TodoItemProps.IS_DONE]: boolean // About the TO-DO Item completed or not.
     [TodoItemProps.CATEGORY]: string // Category of the TO-DO Item.
@@ -30,9 +32,26 @@ interface DeleteTodoItemTag extends Pick<TodoItem, TodoItemProps.ID> {
 
 class TodoList {
     private list: Map<TodoItem[TodoItemProps.ID], TodoItem>
+	private repository: TodoListRepository
 
-	constructor() {
+	constructor( repository: TodoListRepository ) {
 		this.list = new Map()
+		this.repository = repository
+
+		const intialData = repository.load()
+		for (const item of intialData) {
+			this.create({
+				[TodoItemProps.DESCRIPTION]: item[TodoItemProps.DESCRIPTION],
+				[TodoItemProps.CATEGORY]: item[TodoItemProps.CATEGORY],
+				[TodoItemProps.IS_DONE]: item[TodoItemProps.IS_DONE],
+				[TodoItemProps.TAGS]: item[TodoItemProps.TAGS],
+			})
+		}
+	}
+
+	private save(todoItem: TodoItem) {
+		this.list.set(todoItem.id, todoItem)
+		this.repository.save(this.readAll())
 	}
 
 	public create({ description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
@@ -44,7 +63,7 @@ class TodoList {
 			category: category ?? TodoItemCategory.default,
 			tags: tags ?? [],
 		}
-		this.list.set(id, todoItem)
+		this.save(todoItem)
 	}
 
 	public read({ id }: Pick<TodoItem, TodoItemProps.ID>): TodoItem | void {
