@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Routes, Route, Link } from "react-router-dom"
 
-import Todo, { TodoItemProps } from "../../domain/TodoList"
+import TodoList, { TodoItemProps } from "../../domain/TodoList"
 import Checkbox from "../components/Checkbox"
 import List from "../components/List"
 import TextInput from "../components/TextInput"
@@ -21,7 +21,7 @@ enum PATH {
 
 
 interface Props {
-    model: Todo
+    model: TodoList
 }
 
 const Main = ({ model }: Props) => {

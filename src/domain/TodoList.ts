@@ -28,7 +28,7 @@ interface DeleteTodoItemTag extends Pick<TodoItem, TodoItemProps.ID> {
     tagName: string // Name of the tag, if you want to change one tag.
 }
 
-class Todo {
+class TodoList {
     list: Map<TodoItem[TodoItemProps.ID], TodoItem>
 
 	constructor() {
@@ -113,4 +113,4 @@ class Todo {
 	 }
 }
 
-export default Todo
+export default TodoList
