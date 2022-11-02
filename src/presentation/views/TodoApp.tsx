@@ -41,7 +41,6 @@ const Main = ({ model }: Props) => {
     }
     return (
     <>
-    <Link to={PATH.EDIT}>{PAGE_CONTENTS.TITLE_EDIT}</Link>
     <List>
         {todoList.map(todoItem => <Checkbox
             label={todoItem.description}
@@ -68,39 +67,12 @@ const Main = ({ model }: Props) => {
     )
 }
 
-const Edit = ({ model }: Props) => {
-    const [todoList, setTodoList] = useState(model.readAll())
-    return (
-    <>
-    <Link to={PATH.HOME}>{PAGE_CONTENTS.NOTICE_BACK_TO_HOME}</Link>
-    <List>
-        {todoList.map(todoItem => <Checkbox
-            label={todoItem.description}
-            value={todoItem.id}
-            isChecked={todoItem.isDone}
-            isDisabled={true}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                model.update({
-                    [TodoItemProps.ID]: todoItem.id,
-                    property: TodoItemProps.IS_DONE,
-                    newValue: event.target.checked,
-                })
-                setTodoList(model.readAll())
-            }}
-            key={todoItem.id.toString()}
-            />)}
-    </List>
-    </>
-    )
-}
-
 const App = ({ model }: Props) => {
     return (
         <>
         <h1>{PAGE_CONTENTS.TITLE}</h1>
         <Routes>
             <Route path={PATH.HOME} element={<Main model={model} />} />
-            <Route path={PATH.EDIT} element={<Edit model={model} />} />
         </Routes>
         </>
     )
