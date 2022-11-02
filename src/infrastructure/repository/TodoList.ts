@@ -4,10 +4,10 @@ import LocalStorage from "../infrastructure/localstorage"
 const KEY_TODO_DATA = "MY_TODO_LIST" as const
 
 export abstract class TodoListRepository {
-    load(): Array<TodoItem> {
+    public load(): Array<TodoItem> {
         return []
     }
-    save(todoList: Array<TodoItem>) {}
+    public save(todoList: Array<TodoItem>) {}
 }
 
 const isTodoList = (data: Object): data is Array<TodoItem> => {
@@ -35,7 +35,7 @@ const isTodoList = (data: Object): data is Array<TodoItem> => {
 }
 
 export class TodoListLocalRepository extends TodoListRepository {
-    load(): Array<TodoItem> {
+    public load(): Array<TodoItem> {
         const todoList = LocalStorage.get(KEY_TODO_DATA)
         if (!isTodoList(todoList)) {
             LocalStorage.remove(KEY_TODO_DATA)
@@ -43,7 +43,7 @@ export class TodoListLocalRepository extends TodoListRepository {
         }
         return todoList
     }
-    save(todoList: Array<TodoItem>) {
+    public save(todoList: Array<TodoItem>) {
         LocalStorage.set(KEY_TODO_DATA, todoList)
     }
 }
