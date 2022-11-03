@@ -9,7 +9,7 @@ export default ({ model }) => {
     const root = createRoot(rootElement);
     root.render(
       <StrictMode>
-        <BrowserRouter>
+        <BrowserRouter basename="/To-Do">
           <TodoApp model={model} />
         </BrowserRouter>
       </StrictMode>
