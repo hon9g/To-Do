@@ -108,6 +108,7 @@ class TodoList {
  
 	public delete({ id }: Pick<TodoItem, TodoItemProps.ID>) {
 		this.list.delete(id)
+    this.repository.save(this.readAll())
 	}
 
 	public deleteAll() {
