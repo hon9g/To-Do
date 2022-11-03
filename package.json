@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "webpack-dev-server --env=dev",
-		"build": "webpack --env=prod"
+		"build": "webpack --env=prod",
+    "deploy": "npm run build && gh-pages -d dist"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.1.0",
@@ -18,6 +19,7 @@
 		"@types/react-dom": "^18.0.5",
 		"babel-loader": "^8.2.3",
 		"css-loader": "^6.5.1",
+		"gh-pages": "^4.0.0",
 		"html-webpack-plugin": "^5.5.0",
 		"style-loader": "^3.3.1",
 		"typescript": "^4.7.4",
