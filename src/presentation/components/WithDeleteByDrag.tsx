@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 
+import './WithDeleteByDrag.css'
+
+
 const BTN_DELETE = '삭제'
-
-const DeleteButton = () => {
-  return <div className="">{BTN_DELETE}</div>
-}
-
 interface Props {
   wrappedComponent: React.ReactNode
 }
@@ -39,13 +37,14 @@ const WithDeleteByDrag = ({ wrappedComponent }: Props) => {
 
   return (
     <div
+      className="container"
       onMouseDown={handleDragEnter}
       onMouseUp={handleDragEnd}
       onTouchStart={handleDragEnter}
       onTouchEnd={handleDragEnd}
     >
       {wrappedComponent}
-      {onDeleteMode && <DeleteButton />}
+      <div className={`deleteBtn ${onDeleteMode ? 'deleteBtn--active' : ''}`}>{BTN_DELETE}</div>
     </div>
   )
 }

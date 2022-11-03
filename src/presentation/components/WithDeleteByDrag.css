@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.deleteBtn {
+  visibility: hidden;
+  height: 2.5rem;
+  background-color: rgba(255, 0, 0, 0.5);
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  text-indent: 100%;
+  transition-property: width, visibility, text-indent;
+  transition-duration: 0.3s;
+}
+
+.deleteBtn--active {
+  visibility: visible;
+  width: 3rem;
+  text-indent: 0;
+}
