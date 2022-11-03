@@ -1,20 +1,35 @@
 import React, { useState } from "react"
+import { Routes, Route, Link } from "react-router-dom"
 
-import Todo, { TodoItemProps } from "../../domain/TodoList"
-import Checkbox from "../components/Checkbox"
+import TodoList, { TodoItemProps } from "../../domain/TodoList"
+import CheckboxWithDeleteByDrag from "../components/CheckboxWithDeleteByDrag"
 import List from "../components/List"
 import TextInput from "../components/TextInput"
 
-interface Props {
-    model: Todo
+enum PAGE_CONTENTS {
+    TITLE = 'To ~ Do ~! ~!',
+    TITLE_EDIT = '수정',
+    BTN_ADD_TODO_ITEM = '추가',
+    NOTICE_BACK_TO_HOME = '돌아가기',
+    NOTICE_CREATE_TODO_ITEM = '무슨 할 일을 해야하나요? 할 일에 대해 1 글자 이상 입력해주세요.'
 }
 
-const App = ({ model }: Props) => {
+enum PATH {
+    HOME = '/',
+    EDIT = '/edit',
+}
+
+
+interface Props {
+    model: TodoList
+}
+
+const Main = ({ model }: Props) => {
     const [todoList, setTodoList] = useState(model.readAll())
     const [newTodoDescription, setNewTodoDescription] = useState('')
     const addTodoItem = () => {
         if (!newTodoDescription.length) {
-            alert('무슨 할 일을 해야하나요? 할 일에 대해 1 글자 이상 입력해주세요.')
+            alert(PAGE_CONTENTS.NOTICE_CREATE_TODO_ITEM)
             return
         }
         model.create({ description: newTodoDescription })
@@ -25,28 +40,44 @@ const App = ({ model }: Props) => {
         setNewTodoDescription(event.target.value)
     }
     return (
+    <>
+    <List>
+        {todoList.map(todoItem => <CheckboxWithDeleteByDrag
+            label={todoItem.description}
+            value={todoItem.id}
+            isChecked={todoItem.isDone}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                model.update({
+                    [TodoItemProps.ID]: todoItem.id,
+                    property: TodoItemProps.IS_DONE,
+                    newValue: event.target.checked,
+                })
+                setTodoList(model.readAll())
+            }}
+            onDelete={() => {
+              model.delete({ id: todoItem.id })
+              setTodoList(model.readAll())
+            }}
+            key={todoItem.id.toString()}
+            />)}
+    </List>
+    <TextInput
+        value={newTodoDescription}
+        onChange={onChangeNewTodoDescription}
+        onSubmit={addTodoItem}
+        label={PAGE_CONTENTS.BTN_ADD_TODO_ITEM}
+    />
+    </>
+    )
+}
+
+const App = ({ model }: Props) => {
+    return (
         <>
-        <h1>To ~ do ~ !</h1>
-        <List>
-            {todoList.map(todoItem => <Checkbox
-                label={todoItem.description}
-                value={todoItem.id}
-                isChecked={todoItem.isDone}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    model.update({
-                        [TodoItemProps.ID]: todoItem.id,
-                        property: TodoItemProps.IS_DONE,
-                        newValue: event.target.checked,
-                    })
-                    setTodoList(model.readAll())
-                }}
-                />)}
-        </List>
-        <TextInput
-            value={newTodoDescription}
-            onChange={onChangeNewTodoDescription}
-            onSubmit={addTodoItem}
-        />
+        <h1>{PAGE_CONTENTS.TITLE}</h1>
+        <Routes>
+            <Route path={PATH.HOME} element={<Main model={model} />} />
+        </Routes>
         </>
     )
 }
