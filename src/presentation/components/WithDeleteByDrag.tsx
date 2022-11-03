@@ -14,7 +14,6 @@ const WithDeleteByDrag = ({ wrappedComponent, onDelete }: Props) => {
   const [xStart, setXStart] = useState(0)
 
   const handleDragEnter = (e: React.MouseEvent | React.TouchEvent) => {
-    console.log(e)
     if ('clientX' in e) {
       setXStart(e.clientX)
     }
@@ -24,7 +23,6 @@ const WithDeleteByDrag = ({ wrappedComponent, onDelete }: Props) => {
   }
 
   const handleDragEnd = (e: React.MouseEvent | React.TouchEvent) => {
-    console.log(e)
     let xEnd = xStart
     if ('clientX' in e) {
       xEnd = e.clientX
@@ -37,7 +35,6 @@ const WithDeleteByDrag = ({ wrappedComponent, onDelete }: Props) => {
   }
 
   const handleOnDelete = (e: React.MouseEvent) => {
-    console.log(e)
     onDelete(e)
   }
 
