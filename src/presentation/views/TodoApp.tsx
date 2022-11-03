@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Routes, Route, Link } from "react-router-dom"
 
 import TodoList, { TodoItemProps } from "../../domain/TodoList"
-import Checkbox from "../components/Checkbox"
+import CheckboxWithDeleteByDrag from "../components/CheckboxWithDeleteByDrag"
 import List from "../components/List"
 import TextInput from "../components/TextInput"
 
@@ -42,7 +42,7 @@ const Main = ({ model }: Props) => {
     return (
     <>
     <List>
-        {todoList.map(todoItem => <Checkbox
+        {todoList.map(todoItem => <CheckboxWithDeleteByDrag
             label={todoItem.description}
             value={todoItem.id}
             isChecked={todoItem.isDone}
