@@ -16,7 +16,6 @@ enum PAGE_CONTENTS {
 
 enum PATH {
     HOME = '/',
-    EDIT = '/edit',
 }
 
 
