@@ -54,6 +54,10 @@ const Main = ({ model }: Props) => {
                 })
                 setTodoList(model.readAll())
             }}
+            onDelete={() => {
+              model.delete({ id: todoItem.id })
+              setTodoList(model.readAll())
+            }}
             key={todoItem.id.toString()}
             />)}
     </List>

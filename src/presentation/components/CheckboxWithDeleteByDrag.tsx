@@ -1,9 +1,12 @@
 import React from "react"
 
 import Checkbox, { Props as CheckboxProps } from "./Checkbox"
-import WithDeleteByDrag from "./WithDeleteByDrag"
+import WithDeleteByDrag, {Props as WithDeleteByDragProps } from "./WithDeleteByDrag"
 
-const CheckboxWithDeleteByDrag = ({ label, isChecked, value, onChange, isDisabled}: CheckboxProps) => {
+const CheckboxWithDeleteByDrag = (
+    { label, isChecked, value, onChange, isDisabled, onDelete}
+    : CheckboxProps & Omit<WithDeleteByDragProps, 'wrappedComponent'>
+  ) => {
   return <WithDeleteByDrag
     wrappedComponent={<Checkbox
       label={label}
@@ -12,6 +15,7 @@ const CheckboxWithDeleteByDrag = ({ label, isChecked, value, onChange, isDisable
       onChange={onChange}
       isDisabled={isDisabled}
     />}
+    onDelete={onDelete}
   />
 }
 

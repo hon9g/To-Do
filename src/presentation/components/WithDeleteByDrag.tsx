@@ -4,11 +4,12 @@ import './WithDeleteByDrag.css'
 
 
 const BTN_DELETE = '삭제'
-interface Props {
+export interface Props {
   wrappedComponent: React.ReactNode
+  onDelete: (e?: React.MouseEvent) => void
 }
 
-const WithDeleteByDrag = ({ wrappedComponent }: Props) => {
+const WithDeleteByDrag = ({ wrappedComponent, onDelete }: Props) => {
   const [onDeleteMode, setDeleteMode] = useState(false)
   const [xStart, setXStart] = useState(0)
 
@@ -35,6 +36,11 @@ const WithDeleteByDrag = ({ wrappedComponent }: Props) => {
     setXStart(0)
   }
 
+  const handleOnDelete = (e: React.MouseEvent) => {
+    console.log(e)
+    onDelete(e)
+  }
+
   return (
     <div
       className="container"
@@ -44,7 +50,12 @@ const WithDeleteByDrag = ({ wrappedComponent }: Props) => {
       onTouchEnd={handleDragEnd}
     >
       {wrappedComponent}
-      <div className={`deleteBtn ${onDeleteMode ? 'deleteBtn--active' : ''}`}>{BTN_DELETE}</div>
+      <div
+        className={`deleteBtn ${onDeleteMode ? 'deleteBtn--active' : ''}`}
+        onClick={handleOnDelete}
+      >
+        {BTN_DELETE}
+      </div>
     </div>
   )
 }
