@@ -3,9 +3,11 @@ import { Routes, Route } from "react-router-dom"
 
 import TodoList from "../../../domain/TodoList"
 import MainPage from "./MainPage"
+import TodayPage from "./TodayPage"
 
-enum PATH {
+export enum PATH {
     HOME = '/',
+    TODAY = '/today',
 }
 
 interface Props {
@@ -17,6 +19,7 @@ const App = ({ model }: Props) => {
         <>
         <Routes>
             <Route path={PATH.HOME} element={<MainPage model={model} />} />
+            <Route path={PATH.TODAY} element={<TodayPage />} />
         </Routes>
         </>
     )

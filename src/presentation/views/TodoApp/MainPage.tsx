@@ -1,9 +1,12 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
 import TodoList, { TodoItemProps } from "../../../domain/TodoList"
 import CheckboxWithDeleteByDrag from "../../components/CheckboxWithDeleteByDrag"
 import List from "../../components/List"
 import TextInput from "../../components/TextInput"
+
+import { PATH } from "./index"
 
 enum PAGE_CONTENTS {
     TITLE = 'To ~ Do ~! ~!',
@@ -61,6 +64,7 @@ const Main = ({ model }: Props) => {
         onSubmit={addTodoItem}
         label={PAGE_CONTENTS.BTN_ADD_TODO_ITEM}
     />
+    <Link to={PATH.TODAY}> 오늘 할 일 보러가기 </Link>
     </>
     )
 }
