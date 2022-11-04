@@ -5,7 +5,8 @@ export enum TodoItemProps {
 	DESCRIPTION = 'description',
 	IS_DONE = 'isDone',
 	CATEGORY = 'category',
-	TAGS = 'tags'
+	TAGS = 'tags',
+  DEADLINE = 'deadline'
 }
 
 enum TodoItemCategory {
@@ -18,6 +19,7 @@ export interface TodoItem {
     [TodoItemProps.IS_DONE]: boolean // About the TO-DO Item completed or not.
     [TodoItemProps.CATEGORY]: string // Category of the TO-DO Item.
     [TodoItemProps.TAGS]: Array<string> // Tags of the TO-DO Item.
+    [TodoItemProps.DEADLINE]: Date
 }
 
 interface UpdateTodoItem extends Pick<TodoItem, TodoItemProps.ID> {
@@ -54,14 +56,19 @@ class TodoList {
 		this.repository.save(this.readAll())
 	}
 
-	public create({ description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
+	public create({ description, isDone, category, tags, deadline }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
 		const id = new Date()
+    const getNextMidnight = (today) => {
+      today.setHours(24, 0, 0, 0)
+      return today
+    }
 		const todoItem: TodoItem = {
 			id,
 			description: description,
 			isDone: isDone ?? false,
 			category: category ?? TodoItemCategory.default,
 			tags: tags ?? [],
+      deadline: deadline ?? getNextMidnight(new Date()),
 		}
 		this.save(todoItem)
 	}

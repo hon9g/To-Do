@@ -29,11 +29,12 @@ npm run build
 
 ```JavaScript
 Todo {
-  id: 아이디(required),
-  description: 내용(required),
-  isDone: 완료여부(required),
-  category: 카테고리(required),
-  tags: 태그들(optional),
+  id: 아이디,
+  description: 내용,
+  isDone: 완료여부,
+  category: 카테고리,
+  tags: 태그들,
+  deadline: 마감기한
 }
 ```
 
