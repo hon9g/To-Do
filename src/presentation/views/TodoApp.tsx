@@ -40,6 +40,7 @@ const Main = ({ model }: Props) => {
     }
     return (
     <>
+    <h1>{PAGE_CONTENTS.TITLE}</h1>
     <List>
         {todoList.map(todoItem => <CheckboxWithDeleteByDrag
             label={todoItem.description}
@@ -73,7 +74,6 @@ const Main = ({ model }: Props) => {
 const App = ({ model }: Props) => {
     return (
         <>
-        <h1>{PAGE_CONTENTS.TITLE}</h1>
         <Routes>
             <Route path={PATH.HOME} element={<Main model={model} />} />
         </Routes>
