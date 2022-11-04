@@ -39,7 +39,7 @@ const Main = ({ model }: Props) => {
     <>
     <h1>{PAGE_CONTENTS.TITLE}</h1>
     <List>
-        {todoList.map(todoItem => <CheckboxWithDeleteByDrag
+        {todoList.map((todoItem, idx) => <CheckboxWithDeleteByDrag
             label={todoItem.description}
             value={todoItem.id}
             isChecked={todoItem.isDone}
@@ -55,7 +55,7 @@ const Main = ({ model }: Props) => {
               model.delete({ id: todoItem.id })
               setTodoList(model.readAll())
             }}
-            key={todoItem.id.toString()}
+            key={idx}
             />)}
     </List>
     <TextInput
