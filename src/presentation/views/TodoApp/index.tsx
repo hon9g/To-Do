@@ -1,5 +1,6 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
+import './index.css'
 
 import TodoList from "../../../domain/TodoList"
 import MainPage from "./MainPage"

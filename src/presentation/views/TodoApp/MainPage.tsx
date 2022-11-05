@@ -2,9 +2,9 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
 import TodoList, { TodoItemProps } from "../../../domain/TodoList"
-import CheckboxWithDeleteByDrag from "../../components/CheckboxWithDeleteByDrag"
 import List from "../../components/List"
 import TextInput from "../../components/TextInput"
+import TodoItem from "../../components/TodoApp/TodoItem"
 
 import { PATH } from "./index"
 
@@ -35,28 +35,31 @@ const Main = ({ model }: Props) => {
     const onChangeNewTodoDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewTodoDescription(event.target.value)
     }
-    return (
+
+  const toggleItemIsDone = ({ id, isDone }) => {
+    model.update({
+      [TodoItemProps.ID]: id,
+      property: TodoItemProps.IS_DONE,
+      newValue: isDone,
+    })
+    setTodoList(model.readAll())
+  }
+
+  const onItemDelete = ({ id }) => {
+    model.delete({ id })
+    setTodoList(model.readAll())
+  }
+
+  return (
     <>
-    <h1>{PAGE_CONTENTS.TITLE}</h1>
+    <h1 className="title">{PAGE_CONTENTS.TITLE}</h1>
     <List>
-        {todoList.map((todoItem, idx) => <CheckboxWithDeleteByDrag
-            label={todoItem.description}
-            value={todoItem.id}
-            isChecked={todoItem.isDone}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                model.update({
-                    [TodoItemProps.ID]: todoItem.id,
-                    property: TodoItemProps.IS_DONE,
-                    newValue: event.target.checked,
-                })
-                setTodoList(model.readAll())
-            }}
-            onDelete={() => {
-              model.delete({ id: todoItem.id })
-              setTodoList(model.readAll())
-            }}
-            key={idx}
-            />)}
+        {todoList.map((todoItem, idx) => <TodoItem
+          data={todoItem}
+          toggleIsDone={toggleItemIsDone}
+          onDelete={onItemDelete}
+          key={idx}
+        />)}
     </List>
     <TextInput
         value={newTodoDescription}
@@ -66,7 +69,7 @@ const Main = ({ model }: Props) => {
     />
     <Link to={PATH.TODAY}> 오늘 할 일 보러가기 </Link>
     </>
-    )
+  )
 }
 
 export default Main
