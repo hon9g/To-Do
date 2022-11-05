@@ -9,7 +9,7 @@ import TodoItem from "../../components/TodoApp/TodoItem"
 import { PATH } from "./index"
 
 enum PAGE_CONTENTS {
-    TITLE = 'To ~ Do ~! ~!',
+    TITLE = '할 일을 하자 !',
     TITLE_EDIT = '수정',
     BTN_ADD_TODO_ITEM = '추가',
     NOTICE_BACK_TO_HOME = '돌아가기',
