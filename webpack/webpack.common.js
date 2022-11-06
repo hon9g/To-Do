@@ -26,7 +26,7 @@ module.exports = {
             collapseWhitespace: true,
             removeComments: true,
         } : false,
-        publicPath: '/',
+        publicPath: process.env.NODE_ENV === 'production' ? '/To-Do/' : '/',
     }),
 ]
 }
