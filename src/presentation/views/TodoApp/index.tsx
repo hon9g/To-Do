@@ -23,7 +23,7 @@ const App = ({ model }: Props) => {
   const [todoList, setTodoList] = useState(model.readAll())
   const [newItemDescription, setNewItemDescription] = useState("")
   const [newItemDeadline, setNewItemDeadline] = useState(
-    model.getDefaultDeadline()
+    TodoList.getDefaultDeadline()
   )
 
   const addTodoItem = () => {

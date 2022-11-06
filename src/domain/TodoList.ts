@@ -5,6 +5,10 @@ export const getNextMidnight = (today) => {
   return today
 }
 
+const getNextMidnightOneMinuteBefore = (today) => {
+  return getNextMidnight(today).setMinutes(-1)
+}
+
 export enum TodoItemProps {
 	ID = 'id',
 	DESCRIPTION = 'description',
@@ -70,7 +74,7 @@ class TodoList {
 			isDone: isDone ?? false,
 			category: category ?? TodoItemCategory.default,
 			tags: tags ?? [],
-      deadline: deadline ?? getNextMidnight( new Date()),
+      deadline: deadline ?? TodoList.getDefaultDeadline(),
 		}
 		this.save(todoItem)
 	}
@@ -141,8 +145,9 @@ class TodoList {
 		todoItem[TodoItemProps.TAGS] = []
 	}
 
-  public getDefaultDeadline() {
-    return getNextMidnight(new Date())
+  public static getDefaultDeadline() {
+    const todayLastMoment = getNextMidnightOneMinuteBefore(new Date())
+    return todayLastMoment
   }
 
   public static isOutdated(deadline: Date) {
