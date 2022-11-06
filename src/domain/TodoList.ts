@@ -6,7 +6,9 @@ export const getNextMidnight = (today) => {
 }
 
 const getNextMidnightOneMinuteBefore = (today) => {
-  return getNextMidnight(today).setMinutes(-1)
+  const date = getNextMidnight(today)
+  date.setMinutes(-1)
+  return date
 }
 
 export enum TodoItemProps {
