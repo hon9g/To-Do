@@ -64,8 +64,6 @@ const App = ({ model }: Props) => {
           element={
             <MainPage
               todoList={todoList}
-              setTodoList={setTodoList}
-              model={model}
               newItemDescription={newItemDescription}
               setNewItemDescription={onChangeNewTodoDescription}
               newItemDeadline={newItemDeadline}

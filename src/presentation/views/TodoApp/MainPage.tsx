@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-import TodoList, {
+import {
   TodoItemProps,
   TodoItem as TodoItemType,
 } from "../../../domain/TodoList"
@@ -17,9 +17,7 @@ enum PAGE_CONTENTS {
 }
 
 interface Props {
-  model: TodoList
   todoList: Array<TodoItemType>
-  setTodoList: (todoList: Array<TodoItemType>) => void
   newItemDescription: string
   setNewItemDescription: (newDescription: string) => void
   newItemDeadline: Date
@@ -33,9 +31,7 @@ interface Props {
 }
 
 const Main = ({
-  model,
   todoList,
-  setTodoList,
   newItemDescription,
   setNewItemDescription,
   newItemDeadline,
