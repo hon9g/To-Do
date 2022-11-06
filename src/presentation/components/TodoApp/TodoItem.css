@@ -1,0 +1,32 @@
+.item {
+  margin-top: 0.5em;
+  border: 1px cornflowerblue solid;
+  box-shadow: 0.2em 0.5em 0.1em 0 cornflowerblue;
+  color: rgb(12, 12, 20);
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.item:first-child {
+  margin-top: 0
+}
+
+.item label {
+  padding: 0 0.5em;
+}
+
+.dock--bottom {
+  border: 1px cornflowerblue solid;
+  border-top: 0;
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  background-color: aliceblue;
+  color: darkslateblue;
+  font-size: 0.8em;
+  text-align: right;
+  box-shadow: 0.2em 0.3em 0.1em 0 cornflowerblue;
+}
+
+.deadline--outdated {
+  color: #dc0075;
+}

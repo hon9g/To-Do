@@ -1,0 +1,79 @@
+textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.textareaContainer {
+  display: block;
+  margin: 0 auto;
+  border: 1px cornflowerblue solid;
+  padding: 0;
+  max-width: 30em;
+  width: 100%;
+  overflow: hidden;
+}
+
+.textarea {
+  margin: 0;
+  border: none;
+  width: 100%;
+  min-height: 3em;
+  resize: vertical;
+  font-size: 1rem;
+}
+
+.textarea:focus {
+  outline: none;
+  padding: 0;
+}
+
+.btnContainer {
+  display: flex;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0.2em 0;
+  max-width: 30em;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.datepickerContainer {
+  margin-right: auto;
+  width: unset;
+  height: 1.5em;
+  line-height: 1.5em;
+}
+
+.react-datepicker-wrapper {
+  width: unset;
+}
+
+.formBtn {
+  margin-left: 0.2em;
+  border: none;
+  border-radius: 0.2em;
+  padding: 0.3em;
+  background-color: cornflowerblue;
+  color: #FFF;
+  font-size: 1em;
+}
+
+.addBtnContainer {
+  display: block;
+  margin: 0 auto;
+  max-width: 30em;
+  width: 100%;
+  height: 1.5em;
+  line-height: 1.5em;
+}
+
+.circleBtn {
+  margin-right: 0.5em;
+  border-radius: 50%;
+  border: none;
+  width: 1.5em;
+  height: 1.5em;
+  background-color: cornflowerblue;
+  color: #FFF;
+}

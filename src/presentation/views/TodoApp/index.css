@@ -1,0 +1,17 @@
+.title {
+  text-align: center;
+  color: rgb(12, 12, 20);
+}
+
+.link {
+  display: block;
+  margin: 1em;
+  border-radius: 20em;
+  padding: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: cornflowerblue;
+  color: #FFF;
+  text-decoration: none;
+}

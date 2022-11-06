@@ -1,4 +1,5 @@
 import React from "react"
+import './Checkbox.css'
 
 export interface Props {
     label: string
@@ -13,7 +14,7 @@ const Checkbox = ({ label, isChecked, value, onChange, isDisabled }: Props) => {
         onChange(event)
     }
     return (
-        <label>
+        <label className="label">
             <input
                 type="checkbox"
                 name={label}

@@ -1,11 +1,23 @@
 import { TodoListRepository } from "../infrastructure/repository/TodoList"
 
+export const getNextMidnight = (today) => {
+  today.setHours(24, 0, 0, 0)
+  return today
+}
+
+const getNextMidnightOneMinuteBefore = (today) => {
+  const date = getNextMidnight(today)
+  date.setMinutes(-1)
+  return date
+}
+
 export enum TodoItemProps {
 	ID = 'id',
 	DESCRIPTION = 'description',
 	IS_DONE = 'isDone',
 	CATEGORY = 'category',
-	TAGS = 'tags'
+	TAGS = 'tags',
+  DEADLINE = 'deadline'
 }
 
 enum TodoItemCategory {
@@ -18,6 +30,7 @@ export interface TodoItem {
     [TodoItemProps.IS_DONE]: boolean // About the TO-DO Item completed or not.
     [TodoItemProps.CATEGORY]: string // Category of the TO-DO Item.
     [TodoItemProps.TAGS]: Array<string> // Tags of the TO-DO Item.
+    [TodoItemProps.DEADLINE]: Date
 }
 
 interface UpdateTodoItem extends Pick<TodoItem, TodoItemProps.ID> {
@@ -45,6 +58,7 @@ class TodoList {
 				[TodoItemProps.CATEGORY]: item[TodoItemProps.CATEGORY],
 				[TodoItemProps.IS_DONE]: item[TodoItemProps.IS_DONE],
 				[TodoItemProps.TAGS]: item[TodoItemProps.TAGS],
+        [TodoItemProps.DEADLINE]: new Date(item[TodoItemProps.DEADLINE]),
 			})
 		}
 	}
@@ -54,7 +68,7 @@ class TodoList {
 		this.repository.save(this.readAll())
 	}
 
-	public create({ description, isDone, category, tags }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
+	public create({ description, isDone, category, tags, deadline }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
 		const id = new Date()
 		const todoItem: TodoItem = {
 			id,
@@ -62,6 +76,7 @@ class TodoList {
 			isDone: isDone ?? false,
 			category: category ?? TodoItemCategory.default,
 			tags: tags ?? [],
+      deadline: deadline ?? TodoList.getDefaultDeadline(),
 		}
 		this.save(todoItem)
 	}
@@ -131,6 +146,21 @@ class TodoList {
 		}
 		todoItem[TodoItemProps.TAGS] = []
 	}
+
+  public static getDefaultDeadline() {
+    const todayLastMoment = getNextMidnightOneMinuteBefore(new Date())
+    return todayLastMoment
+  }
+
+  public static isOutdated(deadline: Date) {
+    const now = new Date()
+    return deadline < now
+  }
+
+  public static isTodayTodoItem(todoItem: TodoItem) {
+    const tommerowMidnight = getNextMidnight(new Date())
+    return tommerowMidnight > todoItem.deadline
+  }
 }
 
 export default TodoList
