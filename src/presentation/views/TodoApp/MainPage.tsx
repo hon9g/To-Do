@@ -32,8 +32,8 @@ const Main = ({ model }: Props) => {
         setTodoList(model.readAll())
         setNewTodoDescription('')
     }
-    const onChangeNewTodoDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewTodoDescription(event.target.value)
+    const onChangeNewTodoDescription = (newValue: string) => {
+        setNewTodoDescription(newValue)
     }
 
   const toggleItemIsDone = ({ id, isDone }) => {

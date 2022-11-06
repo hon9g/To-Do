@@ -3,7 +3,7 @@ import "./TodoItemForm.css"
 
 interface Props {
   value: string
-  onChange: (event?: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (newValue: string) => void
   onSubmit: (event?: React.FormEvent<HTMLFormElement>) => void
   addItemLabel?: string
   cancleLabel?: string
@@ -17,6 +17,14 @@ enum DEFAULT {
 
 const TodoItemForm = ({ value, onChange, onSubmit, addItemLabel }: Props) => {
   const [isActive, setIsActive] = useState(false)
+  const handleOnSubmit = (e: React.MouseEvent) => {
+    onSubmit()
+    onChange('')
+    e.preventDefault()
+  }
+  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange(e.target.value)
+  }
   return (
     <>
     {
@@ -30,7 +38,7 @@ const TodoItemForm = ({ value, onChange, onSubmit, addItemLabel }: Props) => {
     isActive && (
     <>
     <div className="textareaContainer">
-      <textarea className="textarea" />
+      <textarea className="textarea" onChange={handleOnChange} value={value} />
     </div>
     <div className="btnContainer">
       <button
@@ -39,7 +47,12 @@ const TodoItemForm = ({ value, onChange, onSubmit, addItemLabel }: Props) => {
       >
         {DEFAULT.cancleLabel}
       </button>
-      <button className="formBtn">{addItemLabel ?? DEFAULT.addItemLabel}</button>
+      <button
+        className="formBtn"
+        onClick={handleOnSubmit}
+      >
+        {addItemLabel ?? DEFAULT.addItemLabel}
+      </button>
     </div>      
     </>
     )}
