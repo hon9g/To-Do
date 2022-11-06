@@ -6,6 +6,8 @@ import List from "../../components/List"
 import TodoItem from "../../components/TodoApp/TodoItem"
 import TodoItemForm from "../../components/TodoApp/TodoItemForm"
 
+import { getNextMidnight } from "../../../domain/TodoList"
+
 import { PATH } from "./index"
 
 enum PAGE_CONTENTS {
@@ -21,21 +23,27 @@ interface Props {
 }
 
 const Main = ({ model }: Props) => {
-    const [todoList, setTodoList] = useState(model.readAll())
-    const [newTodoDescription, setNewTodoDescription] = useState('')
-    const addTodoItem = () => {
-        if (!newTodoDescription.length) {
-            alert(PAGE_CONTENTS.NOTICE_CREATE_TODO_ITEM)
-            return
-        }
-        model.create({ description: newTodoDescription })
-        setTodoList(model.readAll())
-        setNewTodoDescription('')
-    }
-    const onChangeNewTodoDescription = (newValue: string) => {
-        setNewTodoDescription(newValue)
-    }
+  const [todoList, setTodoList] = useState(model.readAll())
+  const [newTodoDescription, setNewTodoDescription] = useState('')
+  const [deadline, setDeadline] = useState(getNextMidnight(new Date()))
 
+  const addTodoItem = () => {
+    if (!newTodoDescription.length) {
+        alert(PAGE_CONTENTS.NOTICE_CREATE_TODO_ITEM)
+        return
+    }
+    model.create({
+      description: newTodoDescription,
+      deadline: deadline,
+    })
+    setTodoList(model.readAll())
+    setNewTodoDescription('')
+  }
+
+  const onChangeNewTodoDescription = (newValue: string) => {
+      setNewTodoDescription(newValue)
+  }
+  
   const toggleItemIsDone = ({ id, isDone }) => {
     model.update({
       [TodoItemProps.ID]: id,
@@ -62,8 +70,10 @@ const Main = ({ model }: Props) => {
         />)}
     </List>
     <TodoItemForm
-      value={newTodoDescription}
-      onChange={onChangeNewTodoDescription}
+      description={newTodoDescription}
+      deadline={deadline}
+      onDescriptionChange={onChangeNewTodoDescription}
+      onDeadlineChange={(newDate: Date) => { setDeadline(newDate) }}
       onSubmit={addTodoItem}
     />
     <Link to={PATH.TODAY}> 오늘 할 일 보러가기 </Link>

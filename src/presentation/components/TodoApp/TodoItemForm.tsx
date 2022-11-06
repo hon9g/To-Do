@@ -2,12 +2,11 @@ import React, { useState } from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import "./TodoItemForm.css"
-
-import { getNextMidnight } from "../../../domain/TodoList"
-
 interface Props {
-  value: string
-  onChange: (newValue: string) => void
+  description: string
+  deadline: Date
+  onDescriptionChange: (newValue: string) => void
+  onDeadlineChange: (newDate: Date) => void
   onSubmit: (event?: React.FormEvent<HTMLFormElement>) => void
   addItemLabel?: string
   cancleLabel?: string
@@ -20,19 +19,19 @@ enum DEFAULT {
   deadlineFormLabel = "데드라인: "
 }
 
-const TodoItemForm = ({ value, onChange, onSubmit, addItemLabel }: Props) => {
+const TodoItemForm = ({ description, deadline, onDescriptionChange, onDeadlineChange, onSubmit, addItemLabel }: Props) => {
   const [isActive, setIsActive] = useState(false)
-  const [deadline, setDeadline] = useState(getNextMidnight(new Date()))
+  
   const handleOnSubmit = (e: React.MouseEvent) => {
     onSubmit()
-    onChange('')
+    onDescriptionChange('')
     e.preventDefault()
   }
-  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(e.target.value)
+  const handleDescriptionOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onDescriptionChange(e.target.value)
   }
-  const handleDateChange = (date: Date) => {
-    setDeadline(date)
+  const handleDateChange = (newDate: Date) => {
+    onDeadlineChange(newDate)
   }
   return (
     <>
@@ -47,7 +46,7 @@ const TodoItemForm = ({ value, onChange, onSubmit, addItemLabel }: Props) => {
     isActive && (
     <>
     <div className="textareaContainer">
-      <textarea className="textarea" onChange={handleOnChange} value={value} />
+      <textarea className="textarea" onChange={handleDescriptionOnChange} value={description} />
     </div>
     <div className="btnContainer">
       <div className="datepickerContainer">
