@@ -149,6 +149,12 @@ class TodoList {
     const now = new Date()
     return deadline < now
   }
+
+  public static isTodayTodoItem(todoItem: TodoItem) {
+    const todayMidnight = getNextMidnight(new Date())
+    console.log(todayMidnight)
+    return todayMidnight >= todoItem.deadline
+  }
 }
 
 export default TodoList

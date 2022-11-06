@@ -74,7 +74,21 @@ const App = ({ model }: Props) => {
             />
           }
         />
-        <Route path={PATH.TODAY} element={<TodayPage />} />
+        <Route
+          path={PATH.TODAY}
+          element={
+            <TodayPage
+              todoList={todoList}
+              newItemDescription={newItemDescription}
+              setNewItemDescription={onChangeNewTodoDescription}
+              newItemDeadline={newItemDeadline}
+              setNewItemDeadline={setNewItemDeadline}
+              addNewItem={addTodoItem}
+              toggleItemIsDone={toggleItemIsDone}
+              onItemDelete={onItemDelete}
+            />
+          }
+        />
       </Routes>
     </>
   )
