@@ -52,6 +52,7 @@ class TodoList {
 				[TodoItemProps.CATEGORY]: item[TodoItemProps.CATEGORY],
 				[TodoItemProps.IS_DONE]: item[TodoItemProps.IS_DONE],
 				[TodoItemProps.TAGS]: item[TodoItemProps.TAGS],
+        [TodoItemProps.DEADLINE]: new Date(item[TodoItemProps.DEADLINE]),
 			})
 		}
 	}
