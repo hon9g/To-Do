@@ -143,6 +143,11 @@ class TodoList {
   public getDefaultDeadline() {
     return getNextMidnight(new Date())
   }
+
+  public static isOutdated(deadline: Date) {
+    const now = new Date()
+    return deadline < now
+  }
 }
 
 export default TodoList

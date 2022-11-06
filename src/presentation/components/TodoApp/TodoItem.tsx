@@ -2,7 +2,7 @@ import React from "react"
 import "./TodoItem.css"
 
 import CheckboxWithDeleteByDrag from "../CheckboxWithDeleteByDrag"
-import { TodoItem as TodoItemType , TodoItemProps } from "../../../domain/TodoList"
+import TodoListModel, { TodoItem as TodoItemType , TodoItemProps } from "../../../domain/TodoList"
 
 interface Props {
   data: TodoItemType
@@ -32,7 +32,7 @@ const TodoItem = ({ data, toggleIsDone, onDelete }: Props) => {
       onDelete={handleOnDelete}
       />
     </div>
-      <div className="dock--bottom">
+      <div className={`dock--bottom ${TodoListModel.isOutdated(data.deadline) ? 'deadline--outdated' : ''}`}>
         {`${data.deadline.toLocaleString()} 까지`}
       </div>
     </>
