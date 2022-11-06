@@ -139,6 +139,10 @@ class TodoList {
 		}
 		todoItem[TodoItemProps.TAGS] = []
 	}
+
+  public getDefaultDeadline() {
+    return getNextMidnight(new Date())
+  }
 }
 
 export default TodoList

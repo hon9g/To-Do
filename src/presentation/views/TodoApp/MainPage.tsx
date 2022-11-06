@@ -6,8 +6,6 @@ import List from "../../components/List"
 import TodoItem from "../../components/TodoApp/TodoItem"
 import TodoItemForm from "../../components/TodoApp/TodoItemForm"
 
-import { getNextMidnight } from "../../../domain/TodoList"
-
 import { PATH } from "./index"
 
 enum PAGE_CONTENTS {
@@ -25,7 +23,7 @@ interface Props {
 const Main = ({ model }: Props) => {
   const [todoList, setTodoList] = useState(model.readAll())
   const [newTodoDescription, setNewTodoDescription] = useState('')
-  const [deadline, setDeadline] = useState(getNextMidnight(new Date()))
+  const [deadline, setDeadline] = useState(model.getDefaultDeadline())
 
   const addTodoItem = () => {
     if (!newTodoDescription.length) {
