@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 
 import TodoList, { TodoItemProps } from "../../../domain/TodoList"
 import List from "../../components/List"
-import TextInput from "../../components/TextInput"
 import TodoItem from "../../components/TodoApp/TodoItem"
+import TodoItemForm from "../../components/TodoApp/TodoItemForm"
 
 import { PATH } from "./index"
 
@@ -61,11 +61,10 @@ const Main = ({ model }: Props) => {
           key={idx}
         />)}
     </List>
-    <TextInput
-        value={newTodoDescription}
-        onChange={onChangeNewTodoDescription}
-        onSubmit={addTodoItem}
-        label={PAGE_CONTENTS.BTN_ADD_TODO_ITEM}
+    <TodoItemForm
+      value={newTodoDescription}
+      onChange={onChangeNewTodoDescription}
+      onSubmit={addTodoItem}
     />
     <Link to={PATH.TODAY}> 오늘 할 일 보러가기 </Link>
     </>
