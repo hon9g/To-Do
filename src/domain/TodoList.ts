@@ -1,5 +1,10 @@
 import { TodoListRepository } from "../infrastructure/repository/TodoList"
 
+export const getNextMidnight = (today) => {
+  today.setHours(24, 0, 0, 0)
+  return today
+}
+
 export enum TodoItemProps {
 	ID = 'id',
 	DESCRIPTION = 'description',
@@ -58,17 +63,13 @@ class TodoList {
 
 	public create({ description, isDone, category, tags, deadline }: Pick<TodoItem, TodoItemProps.DESCRIPTION> & Partial<TodoItem>) {
 		const id = new Date()
-    const getNextMidnight = (today) => {
-      today.setHours(24, 0, 0, 0)
-      return today
-    }
 		const todoItem: TodoItem = {
 			id,
 			description: description,
 			isDone: isDone ?? false,
 			category: category ?? TodoItemCategory.default,
 			tags: tags ?? [],
-      deadline: deadline ?? getNextMidnight(new Date()),
+      deadline: deadline ?? getNextMidnight( new Date()),
 		}
 		this.save(todoItem)
 	}

@@ -38,6 +38,17 @@ textarea {
   justify-content: flex-end;
 }
 
+.datepickerContainer {
+  margin-right: auto;
+  width: unset;
+  height: 1.5em;
+  line-height: 1.5em;
+}
+
+.react-datepicker-wrapper {
+  width: unset;
+}
+
 .formBtn {
   margin-left: 0.2em;
   border: none;
