@@ -74,7 +74,7 @@ const Main = ({ model }: Props) => {
       onDeadlineChange={(newDate: Date) => { setDeadline(newDate) }}
       onSubmit={addTodoItem}
     />
-    <Link to={PATH.TODAY}> 오늘 할 일 보러가기 </Link>
+    <Link to={PATH.TODAY} className="link"> 오늘 할 일 보러가기 </Link>
     </>
   )
 }
