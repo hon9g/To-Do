@@ -13,6 +13,7 @@ import { PATH } from "./index"
 
 enum PAGE_CONTENTS {
   TITLE = "할 일을 하자 !",
+  GOTO_TODAY = "오늘 할 일 보러가기",
 }
 
 interface Props {
@@ -64,8 +65,7 @@ const Main = ({
         onSubmit={addNewItem}
       />
       <Link to={PATH.TODAY} className="link">
-        {" "}
-        오늘 할 일 보러가기{" "}
+        {PAGE_CONTENTS.GOTO_TODAY}
       </Link>
     </>
   )
