@@ -1,14 +1,10 @@
-import React, { ReactNode } from "react"
-import "./List.css"
+import styled from "@emotion/styled"
 
-interface Props {
-    children: Array<ReactNode>
-}
-
-const List = ({ children }: Props) => {
-    return (
-        <div className="List">{children}</div>
-    )
-}
+const List = styled.div`
+  margin: 1.2em auto 2em;
+  display: flex;
+  flex-direction: column;
+  max-width: 30em;
+`
 
 export default List
