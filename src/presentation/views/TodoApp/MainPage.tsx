@@ -1,10 +1,9 @@
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
-
+import React from "react"
 import {
   TodoItemProps,
   TodoItem as TodoItemType,
 } from "../../../domain/TodoList"
+import LinkButton from "../../components/LinkButton"
 import List from "../../components/List"
 import Title from "../../components/Title"
 import TodoItem from "../../components/TodoApp/TodoItem"
@@ -61,9 +60,9 @@ const Main = ({
         onDeadlineChange={setNewItemDeadline}
         onSubmit={addNewItem}
       />
-      <Link to={PATH.TODAY} className="link">
+      <LinkButton to={PATH.TODAY} className="link">
         {PAGE_CONTENTS.GOTO_TODAY}
-      </Link>
+      </LinkButton>
     </>
   )
 }
