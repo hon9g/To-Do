@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Routes, Route } from "react-router-dom"
-import "./index.css"
 
 import TodoList, { TodoItemProps } from "../../../domain/TodoList"
 import MainPage from "./MainPage"
