@@ -6,6 +6,7 @@ import {
   TodoItem as TodoItemType,
 } from "../../../domain/TodoList"
 import List from "../../components/List"
+import Title from "../../components/Title"
 import TodoItem from "../../components/TodoApp/TodoItem"
 import TodoItemForm from "../../components/TodoApp/TodoItemForm"
 
@@ -42,7 +43,7 @@ const Main = ({
 }: Props) => {
   return (
     <>
-      <h1 className="title">{PAGE_CONTENTS.TITLE}</h1>
+      <Title>{PAGE_CONTENTS.TITLE}</Title>
       <List>
         {todoList.map((todoItem, idx) => (
           <TodoItem
