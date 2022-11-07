@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin")
 const path = require("path");
 const webpack = require("webpack")
 
@@ -19,14 +18,4 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-        template: './presentation/index.html',
-        minify: process.env.NODE_ENV === 'production' ? {
-            collapseWhitespace: true,
-            removeComments: true,
-        } : false,
-        publicPath: process.env.NODE_ENV === 'production' ? '/To-Do/' : '/',
-    }),
-]
 }

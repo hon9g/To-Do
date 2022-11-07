@@ -2,6 +2,7 @@
 	"name": "doc-todo",
 	"version": "1.0.0",
 	"description": "",
+  "homepage": "https://hon9g.github.io/To-Do/",
 	"main": "index.js",
 	"scripts": {
 		"dev": "webpack-dev-server --env=dev",
